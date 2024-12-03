@@ -18,12 +18,7 @@ export const ByCategory = () => {
     endpoint:`/bidi-bags/category/${categoryName}`, 
     searchType:'ByCategory'
   }); 
-  if (!products || products.length === 0) {
-    return <Error 
-    text={`No se encontraron productos en la categoría "${categoryName}"`} />;
-  }
-
-
+  
   const handleSelectionClick = (id) => { 
     console.log("Haciendo clic en producto con ID:", id);
     navigate(`/product/${id}`);
