@@ -19,12 +19,6 @@ export const ByCategory = () => {
     searchType:'ByCategory'
   }); 
   
-  const handleSelectionClick = (id) => { 
-    console.log("Haciendo clic en producto con ID:", id);
-    navigate(`/product/${id}`);
-  };
-  
-
   if (loading) return (
     <Loading
     loading={loading}
@@ -37,6 +31,20 @@ export const ByCategory = () => {
     return <Error 
     text="Hubo un error al cargar los productos. Por favor, inténtalo de nuevo." />;
   }
+  
+  if (!products || products.length === 0) {
+    return <Loading
+    text={`No se encontraron productos en la categoría "${categoryName}"`} />;
+  }
+
+
+  const handleSelectionClick = (id) => { 
+    console.log("Haciendo clic en producto con ID:", id);
+    navigate(`/product/${id}`);
+  };
+  
+
+
 
   
 
