@@ -8,10 +8,13 @@ const { FavoritesDiv, MisFavoritos } = StyledUserAccount;
 export const MyFavorites = () => {
 
   const navigate = useNavigate()
-  const { user } = useAuth();
+  const { user, toggleFavorite } = useAuth();
 
   const handleFavoriteClick = (id) => {
       navigate(`/product/${id}`)
+  };
+  const handleToggleFavorite = (product) => {
+    toggleFavorite(product);
   };
 
 
@@ -28,6 +31,7 @@ export const MyFavorites = () => {
                             key={product._id}
                             img={product.img}  
                             onClick={() => handleFavoriteClick(product._id)}// Navegar al _id
+                            onFavoriteToggle={() => handleToggleFavorite(product)} 
                         />
                     );
                 })

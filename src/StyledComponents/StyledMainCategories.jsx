@@ -1,4 +1,7 @@
-.categoryContainer {
+import styled from 'styled-components';
+
+
+const CategoryContainer  = styled.div `
     display: grid;   
     grid-template-columns: repeat(3, 1fr); 
     grid-template-rows: auto;  
@@ -9,11 +12,8 @@
     min-height: 80vh;
     gap: var(--gap-m);
     box-sizing: border-box;
-}
 
-
-
-@media screen and (max-width: 480px) {
+    @media screen and (max-width: 480px) {
 
     .categoryContainer {
         display: grid;    
@@ -63,3 +63,6 @@
         width:60%;
     }
 }
+`
+
+export default { CategoryContainer }

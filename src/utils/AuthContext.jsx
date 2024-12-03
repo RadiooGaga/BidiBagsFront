@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
 
   // Método para añadir o eliminar productos de favoritos
   const toggleFavorite = (product) => {
-    // Validaciones iniciales
+
     if (!user || !user.favorites) {
       console.error("El usuario no está autenticado o no tiene favoritos inicializados.");
       return;
@@ -73,6 +73,7 @@ export const AuthProvider = ({ children }) => {
     // Actualizar los favoritos en el estado de usuario
     try {
       updateUser({ favorites: updatedFavorites });
+      console.log("USUARIO ACTUALIZADO!");
     } catch (error) {
       console.error("Error al actualizar los favoritos:", error);
     }

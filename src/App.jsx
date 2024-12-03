@@ -4,7 +4,7 @@ import { AuthProvider } from './utils/AuthContext';
 import './App.css'
 
 import { Header } from './components/Header/Header';
-import { MainCategories } from './components/MainCategories/MainCategories';
+import { ByCategories } from './pages/Searchby/byCategories';
 import { TheDesign } from './pages/TheDesign/TheDesign';
 import { Blog } from './pages/Blog/Blog';
 
@@ -41,6 +41,7 @@ import { Footer } from './components/Footer/Footer';
 
 
 
+
 export const App = () => {
 
   const [transition, setTransition] = useState(false);
@@ -64,7 +65,7 @@ export const App = () => {
        <div className={`App ${transition ? 'page-enter-active' : 'page-exit-active'}`}>
       <Header />
         <Routes>
-          <Route path="/" index element={<MainCategories />} />
+          <Route path="/" index element={<ByCategories />} />
           <Route path="/concept" element={<TheDesign />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/register" element={<LoginRegister />} />
