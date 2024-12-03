@@ -21,8 +21,12 @@ const NavBarMain = styled.div `
     @media screen and (min-width: 769px) and (max-width: 1023px){
         width: 50%;
     }
-    @media screen and (min-width: 1024px) and (max-width: 1443px){
-        width: 50%;
+    @media screen and (min-width: 1443px){
+        width: 30%;
+    }
+
+    @media screen and (min-width: 1444px) and (max-width: 1443px){
+    width: 50%;
     }
 
 `

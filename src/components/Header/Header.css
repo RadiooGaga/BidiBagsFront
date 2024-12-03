@@ -82,3 +82,10 @@
         padding: 0;
     }
 }
+
+@media screen and (min-width: 1443px) {
+    .divBrand {
+        width: 40%;
+        padding: 0;
+    }
+}
