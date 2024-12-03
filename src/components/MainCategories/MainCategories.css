@@ -1,13 +1,12 @@
 .categoryContainer {
-    display: flex;
+    display: grid;   
+    grid-template-columns: repeat(3, 1fr); 
+    grid-template-rows: auto;  
     justify-content: center;
     align-items: center;
     text-align: center;
     width: 50%;
     min-height: 80vh;
-    display: grid;   
-    grid-template-columns: repeat(3, 1fr); 
-    grid-template-rows: auto;  
     gap: var(--gap-m);
     box-sizing: border-box;
 }
@@ -17,11 +16,14 @@
 @media screen and (max-width: 480px) {
 
     .categoryContainer {
-        width: 95%;
-        height: auto;
         display: grid;    
         grid-template-columns: repeat(2, 1fr); 
         grid-template-rows: auto; 
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 95%;
+        height: auto;
         margin: 10px 0 10px 0;
         gap: var(--gap-m);
     }
