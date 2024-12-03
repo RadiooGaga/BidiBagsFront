@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Button } from '../Button/Button'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../utils/AuthContext';
-import { useApi } from '../../utils/useApi';
 import StyledProductPages from '../../StyledComponents/StyledProductPages';
 const { ProductCardDetailed } = StyledProductPages; 
 import StyledCards from '../../StyledComponents/StyledProductCards';
@@ -10,35 +9,27 @@ const { GalleryImgDiv, ProductCardGalleryPic, ContentProduct, Intro, TextContent
     ProductCardH2, ProductCardH3, SpanContent, Heart, Description, Details,Paragraph } = StyledCards;
 
 
-    export const CardDetails = () => {
-        const { id } = useParams(); // Obtener el id de la URL
-        const { products, loading, error } = useApi({
-          endpoint: `/bidi-bags/product/${id}`,
-          searchType: 'ById',
-        });
-    
+    export const CardDetails = ({ products }) => {
+
+        const [isFavorite, setIsFavorite] = useState(false);
         const { user, toggleFavorite } = useAuth();
         const navigate = useNavigate();
-        const [isFavorite, setIsFavorite] = useState(false);
-    
-        // Asegúrate de que los datos del producto se han cargado antes de continuar
+
+          // Establecer el estado de 'isFavorite' basado en los favoritos del usuario
         useEffect(() => {
-            if (user && user.favorites && products) {
-                const isProductFavorite = user.favorites.some(fav => fav._id === products._id); 
-                setIsFavorite(isProductFavorite);
+            if (user && user.favorites) {
+            const isProductFavorite = user.favorites.some(fav => fav._id === products._id);
+            setIsFavorite(isProductFavorite);
             }
-        }, [user, products]); // Dependiendo de 'user' y 'products'
-    
+        }, [user, products]);
+
         const handleFavoriteClick = () => {
             console.log('Producto recibido en handleFavoriteClick:', products);
             toggleFavorite(products); // Usar el objeto completo de producto
             setIsFavorite(!isFavorite); 
             navigate('/account/favorites'); 
         };
-    
-        if (loading) return <p>Loading...</p>;
-        if (error) return <p>Error loading product</p>;
-    
+
         return (
             <ProductCardDetailed>
                 <GalleryImgDiv>

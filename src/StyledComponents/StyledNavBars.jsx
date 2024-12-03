@@ -38,6 +38,7 @@ const NavBarMainUl = styled.ul `
         justify-content: space-evenly;
         width: 100%;
         gap: var(--gap-s);
+        padding-left: 0px;
             
     }
 

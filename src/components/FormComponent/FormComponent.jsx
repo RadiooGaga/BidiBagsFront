@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './FormComponent.css';
 import { Button } from '../Button/Button';
+import { div } from 'framer-motion/client';
 
 
 export const FormComponent = React.memo(({ className, fields, text, onSubmit }) => {
@@ -112,6 +113,7 @@ export const FormComponent = React.memo(({ className, fields, text, onSubmit }) 
   };
 
   return (
+    <>
     <form onSubmit={handleSubmit} className={className || 'default-form-class'}>
       {fields.map(renderField)} {/* Renderiza cada campo */}
       {imgPreview && (
@@ -124,7 +126,7 @@ export const FormComponent = React.memo(({ className, fields, text, onSubmit }) 
         type="submit"
         className='button'
         text={text}
-        width="480px"
+        width="100%"
         backgroundColor="var(--color-almostBlack)"
         colorText="white"
         hoverBackgroundColor="var(--color-aubergine)"
@@ -132,5 +134,6 @@ export const FormComponent = React.memo(({ className, fields, text, onSubmit }) 
         padding="15px"
       />
     </form>
+    </>
   );
 });

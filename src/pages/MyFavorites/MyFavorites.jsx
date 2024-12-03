@@ -3,7 +3,7 @@ import { Card } from '../../components/ProductCards/Card';
 import { useAuth } from '../../utils/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import StyledUserAccount from '../../StyledComponents/StyledUserAccount';
-const { FavoritesDiv } = StyledUserAccount;
+const { FavoritesDiv, MisFavoritos } = StyledUserAccount;
 
 export const MyFavorites = () => {
 
@@ -16,8 +16,10 @@ export const MyFavorites = () => {
 
 
     return (
+        <>
+        <MisFavoritos>MIS FAVORITOS</MisFavoritos>
         <FavoritesDiv>
-            <h2>Mis Favoritos</h2>
+            
             {user.favorites && user.favorites.length > 0 ? (
                 user.favorites.map((product) => {
                     {/*console.log(product, "HAY PRODUCTO?");*/}
@@ -30,8 +32,9 @@ export const MyFavorites = () => {
                     );
                 })
             ) : (
-                <p>No tienes productos en tus favoritos.</p>
+                <span>No tienes productos en tus favoritos.</span>
             )}
         </FavoritesDiv>
+        </>
     );
 };

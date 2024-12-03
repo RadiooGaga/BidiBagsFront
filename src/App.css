@@ -75,7 +75,7 @@ ul {
 @media screen and (max-width: 480px) {
 
   h1 {
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-m);
   }
   
   h2 {

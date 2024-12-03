@@ -1,17 +1,20 @@
-.sectionLoginRegister {
+.sectionRegister {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width:90%;
     height: 80vh;
+    box-sizing: border-box;
 }
 
 .accountAlreadyDiv {
     display: flex;
+    width: 500px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: var(--padding-s);
 }
 
 .registerFormP {
@@ -21,3 +24,28 @@
 .errorMessageDiv {
     color: palevioletred;
 }  
+
+
+
+@media screen and (max-width: 480px) {
+
+    .accountAlreadyDiv {
+        width: 320px;
+        padding: var(--padding-l);
+    }
+    
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px){
+    .accountAlreadyDiv {
+        width: 420px;
+        padding: var(--padding-l);
+    }
+}
+
+@media screen and (min-width: 769px) and (max-width: 1023px){
+    .accountAlreadyDiv {
+        width: 500px;
+        padding: var(--padding-s);
+    }
+}

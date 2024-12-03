@@ -3,7 +3,7 @@ import StyledProductCards from '../../StyledComponents/StyledProductCards';
 const { ProductCard, DivImgProductCard, ProductCardPic, ProductDetails, ProductCardH4 } = StyledProductCards; 
 
 
-export const Card = ({ img, categoryName, visibleText, visibleStyle, onClick })=> {
+export const Card = React.memo(({ img, categoryName, visibleText, visibleStyle, onClick })=> {
 
   return (
     <ProductCard  onClick={onClick} style={visibleStyle}>
@@ -17,4 +17,4 @@ export const Card = ({ img, categoryName, visibleText, visibleStyle, onClick })=
         </ProductDetails>
     </ProductCard>
   )
-}
+})

@@ -36,10 +36,15 @@ const FavoritesDiv = styled.div `
     gap: var(--gap-xl)
 `
 
+const MisFavoritos = styled.span ` 
+    font-family: var(--font-walkway); 
+    font-size: var(--font-size-m);
+`
+
  const ByeMessage = styled.p `
     font-family: var(--font-walkway);
     font-size: var(--font-size-m);
     color: var(--color-aubergine);
 `
 
-export default { UserAccountDiv, DataDiv, FavoritesDiv, ByeMessage }
+export default { UserAccountDiv, DataDiv, FavoritesDiv, MisFavoritos, ByeMessage }

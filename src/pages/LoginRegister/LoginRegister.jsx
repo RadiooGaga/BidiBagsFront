@@ -108,7 +108,7 @@ export const LoginRegister = () => {
         <Button
           type="button"
           text="INICIA SESIÓN"
-          width="480px"
+          width="100%"
           backgroundColor="var(--color-almostBlack)"
           colorText="white"
           hoverBackgroundColor="var(--color-aubergine)" 
