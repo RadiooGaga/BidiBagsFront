@@ -1,0 +1,46 @@
+.loading,.noProductsFound {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--rtc--font-family-ultima);
+    color: var(--rtc--color-superlightgreen);
+    font-size: 20px;
+    margin-top: 30px;
+    letter-spacing: 2px;
+}
+
+.noProductsFound {
+    color: var(--rtc--color-supersoftpink);
+  
+}
+
+
+
+/* MEDIA QUERIES */
+
+
+@media (max-width: 480px) {
+
+    .loading,.noProductsFound {
+        font-size: 12px;
+        margin-top: 30px;
+        letter-spacing: 2px;
+    }
+    .noProductsFound {
+        color: var(--rtc--color-supersoftpink);
+    } 
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+
+    .loading,.noProductsFound {
+        font-size: 14px;
+        margin-top: 30px;
+        letter-spacing: 2px;
+    }
+    .noProductsFound {
+        color: var(--rtc--color-supersoftpink);
+    }
+}

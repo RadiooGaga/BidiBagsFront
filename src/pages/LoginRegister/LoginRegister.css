@@ -1,0 +1,23 @@
+.sectionLoginRegister {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:90%;
+    height: 80vh;
+}
+
+.accountAlreadyDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.registerFormP {
+    margin: var(--margin-s);
+}
+
+.errorMessageDiv {
+    color: palevioletred;
+}  

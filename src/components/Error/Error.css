@@ -1,0 +1,28 @@
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--rtc--font-family-ultima);
+    color: var(--rtc--color-superlightgreen);
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+
+/* MEDIA QUERIES */
+
+
+@media (max-width: 480px) {
+
+    .error {
+        font-size: 12px;
+    }  
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+
+    .error {
+        font-size: 14px;
+    }
+}

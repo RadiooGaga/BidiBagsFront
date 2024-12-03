@@ -1,0 +1,106 @@
+.divFooter {
+    display: flex;
+    position: relative;
+    bottom: 0;
+    justify-content: center;
+    width: 100%;
+    height: 60px;
+    background-color: var(--color-headerandfooter);
+    padding: 5px 3em;
+    margin-bottom: 10px;
+}
+
+.socialmediaNavbar {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 40%;
+    gap: var(--gap-m);
+}
+
+
+@media screen and (max-width: 480px) {
+
+    .divFooter {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        justify-content: center;
+        padding: 5px 1em;
+        bottom: 0;
+    }
+
+    .socialmediaNavbar {
+        width: 100%;
+        padding: 5px;
+        height: 5px;
+        background-color: antiquewhite;
+    }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px){
+
+    .divFooter {
+        display: flex;
+        position: relative;
+        flex-direction: column;
+        justify-content: center;
+        padding: 5px 1em;
+        bottom: 0;
+    }
+
+    .socialmediaNavbar {
+        width: 100%;
+        padding: 5px;
+        height: 5px;
+        background-color: antiquewhite;
+    }
+
+}
+
+@media screen and (min-width: 769px) and (max-width: 1023px){
+
+    .divFooter {
+        display: flex;
+        position:relative;
+        justify-content: center;
+        padding: 5px 1em;
+        bottom: 0;
+    }
+
+    .socialmediaNavbar {
+        width: 20%;
+        padding: 5px;
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1443px){
+
+    .divFooter {
+        display: flex;
+        position: relative;
+        justify-content: center;
+        padding: 5px 1em;
+        bottom: 0;
+    }
+
+    .socialmediaNavbar {
+        width: 35%;
+        padding: 5px;
+    }
+}
+
+@media screen and (min-width: 1444px) and (max-width: 1919px) {
+    .divFooter {
+        display: flex;
+        position: relative;
+        justify-content: center;
+        padding: 5px 1em;
+        bottom: 0;
+    }
+
+    .socialmediaNavbar {
+        width: 35%;
+        padding: 5px;
+    }
+}

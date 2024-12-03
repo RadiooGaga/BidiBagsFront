@@ -1,0 +1,43 @@
+.formBlogComponentDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    padding: var(--padding-s);
+    gap: var(--gap-s);
+    box-sizing: border-box;
+}
+
+.styleTextSelector, .fontSelector {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: start;
+    width: 100%;
+    gap: var(--gap-m);
+    margin-bottom: var(--margin-m);
+}
+
+.fontSelector {
+    width: auto;
+    height: 30px;
+    margin: 0;
+}
+
+.inputFileBlog {
+    width: auto;
+    min-height: 30px;
+    margin-bottom: var(--margin-s);
+    padding: 0 var(--padding-s);
+    border-radius: 3px;
+    border: 1px solid var(--color-almostBlack);
+    background-color: var(--color-almostWhite);
+}
+
+
+.chosenStyle {
+    width: 30px;
+    height: 30px;
+}

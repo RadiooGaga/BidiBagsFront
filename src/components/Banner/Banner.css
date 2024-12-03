@@ -1,0 +1,18 @@
+.banner-container {
+    position: relative;
+    width: 100%;
+    height: 100svh; /* Ajusta la altura según tus necesidades */
+    height: 250px;
+    overflow: hidden;
+    background-color: black;
+}
+  
+.banner-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+}
+
