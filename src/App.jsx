@@ -4,7 +4,7 @@ import { AuthProvider } from './utils/AuthContext';
 import './App.css'
 
 import { Header } from './components/Header/Header';
-import { ByCategories } from './pages/Searchby/byCategories';
+import { AllCategories } from './pages/Searchby/AllCategories';
 import { TheDesign } from './pages/TheDesign/TheDesign';
 import { Blog } from './pages/Blog/Blog';
 
@@ -65,7 +65,7 @@ export const App = () => {
        <div className={`App ${transition ? 'page-enter-active' : 'page-exit-active'}`}>
       <Header />
         <Routes>
-          <Route path="/" index element={<ByCategories />} />
+          <Route path="/" index element={<AllCategories />} />
           <Route path="/concept" element={<TheDesign />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/register" element={<LoginRegister />} />

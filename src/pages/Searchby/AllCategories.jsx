@@ -7,14 +7,14 @@ import { useNavigate } from 'react-router-dom';
 const { CategoryContainer } = StyledMainCategories;
 
 
-export const ByCategories = () => {
+export const AllCategories = () => {
 
     const navigate = useNavigate()
     const [visibleCategories, setVisibleCategories] = useState([]);
 
     const { categories, loading, error } = useApi({
         endpoint: `/bidi-bags/categories`,
-        searchType: 'ByCategories',
+        searchType: 'AllCategories',
     });
 
     // Filtrar las categorías visibles cuando las categorías cambian
