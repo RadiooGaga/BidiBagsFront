@@ -82,7 +82,7 @@ export const Session = () => {
       <Button
         type="button"
         text="CERRAR SESIÓN"
-        width='480px'
+        width='260px'
         backgroundColor="var(--color-barbiePink)"
         colorText="white"
         hoverBackgroundColor="var(--color-aubergine)"
