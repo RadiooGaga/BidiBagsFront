@@ -19,6 +19,8 @@ export const BlogEditor = () => {
  
   // MANEJO DEL REGISTRO
   const handlePost = (formData) => {
+    console.log(formData, "Datos recibidos en handlePost:")
+
     const hasEmptyFields = fields.some((field) => {
         const value = formData[field.name];
         return field.required && (!value || (field.type === 'file' && !value.name));
@@ -28,12 +30,16 @@ export const BlogEditor = () => {
       setTimeout(() => setErrorMessage(''), 2000);
       return;
     }
-    console.log('Post enviado:', formData);
 
     const form = new FormData();
     form.append('title', formData.title);
     form.append('content', formData.content);
     form.append('img', formData.img); 
+// Debugging: Mostrar los valores de FormData
+for (let [key, value] of form.entries()) {
+  console.log(key, value);
+}
+    console.log(form, "datos del post");
 
     // Solicitud POST a la API del registro
     fetch(`${apiUrl}/bidi-bags/create-post`, {
@@ -42,6 +48,7 @@ export const BlogEditor = () => {
       })
       .then(res => {
         if (!res.ok) {
+          console.log(res, 'Error!');
             if (res.status === 500) setErrorMessage('500: Error en el servidor');
         }
         return res.json();
@@ -83,6 +90,7 @@ export const BlogEditor = () => {
         range.surroundContents(span);
       };
 
+  
 
       return (
         <div className='formBlogComponentDiv'>

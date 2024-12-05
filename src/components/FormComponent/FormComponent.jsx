@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './FormComponent.css';
 import { Button } from '../Button/Button';
-import { div } from 'framer-motion/client';
 
 
 export const FormComponent = React.memo(({ className, fields, text, onSubmit }) => {
@@ -18,12 +17,14 @@ export const FormComponent = React.memo(({ className, fields, text, onSubmit }) 
   ); 
   const [imgPreview, setImgPreview] = useState(null);
 
+
   const handleChange = (e) => {
     const { name, type, value, files, checked } = e.target;
     const updatedData = {
       ...formData,
       [name]: type === 'checkbox' ? checked : type === 'file' ? files[0] : value,
     };
+
 
     if (type === 'file' && files[0]) {
       const reader = new FileReader();
@@ -115,7 +116,7 @@ export const FormComponent = React.memo(({ className, fields, text, onSubmit }) 
   return (
     <>
     <form onSubmit={handleSubmit} className={className || 'default-form-class'}>
-      {fields.map(renderField)} {/* Renderiza cada campo */}
+      {fields.map(renderField)} {/* Renderizar cada campo */}
       {imgPreview && (
         <div className="imagePreview">
           <p>Vista previa de la imagen:</p>
