@@ -18,7 +18,7 @@
     max-width: 34em;
     padding: 0 30px 12px 30px;
     object-fit: cover;
-    filter: grayscale(100%);
+    /*filter: grayscale(100%);*/
 }
 
 

@@ -6,7 +6,7 @@ export const TheDesign = () => {
     <>
       <section className='sectionTheDesign'>
         <div className='divDesignStory'>
-        <img src="/assets/pics/paloTheDesign.jpg" alt="palo" />
+        <img src="/assets/pics/palo.jpg" alt="palo" />
       
         
         <h2> SOBRE EL DISEÑO</h2>
