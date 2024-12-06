@@ -13,7 +13,7 @@ export const AllCategories = () => {
     const [visibleCategories, setVisibleCategories] = useState([]);
 
     const { categories, loading, error } = useApi({
-        endpoint: `/bidi-bags/categories`,
+        endpoint: `/categories`,
         searchType: 'AllCategories',
     });
 
@@ -41,7 +41,7 @@ export const AllCategories = () => {
               key={index} 
               categoryName={categoryName}
               img={img} 
-              onClick={() => navigate(`/category/${categoryName}`)}  
+              onClick={() => navigate(`/products/category/${categoryName}`)}  
             />
           ))}
         </CategoryContainer>

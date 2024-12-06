@@ -7,7 +7,7 @@ export const AllMyProducts = () => {
   
   const navigate = useNavigate();
     const { products, loading, error } = useApi({
-      endpoint:`/bidi-bags/products`, 
+      endpoint:`/products`, 
       searchType:'AllMyProducts'
     }); 
 

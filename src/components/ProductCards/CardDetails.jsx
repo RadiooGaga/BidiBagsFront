@@ -15,7 +15,7 @@ const { GalleryImgDiv, ProductCardGalleryPic, ContentProduct, Intro, TextContent
         const { user, toggleFavorite } = useAuth();
         const navigate = useNavigate();
 
-          // Establecer el estado de 'isFavorite' basado en los favoritos del usuario
+        // Establecer el estado de 'isFavorite' basado en los favoritos del usuario
         useEffect(() => {
             if (user && user.favorites) {
             const isProductFavorite = user.favorites.some(fav => fav._id === products._id);

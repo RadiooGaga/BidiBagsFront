@@ -36,7 +36,7 @@ export const Session = () => {
     };
 
     // Actualiza el usuario en el backend
-    fetch(`${apiUrl}/bidi-bags/update-user/${userId}`, {
+    fetch(`${apiUrl}/update-user/${userId}`, {
       method: 'PUT',
       body: JSON.stringify(requestData),
       headers: {

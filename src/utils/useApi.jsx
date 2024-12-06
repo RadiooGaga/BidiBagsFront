@@ -1,49 +1,54 @@
 import { useEffect, useReducer, useRef } from 'react';
 import { INITIAL_STATE, reducer } from './useReducer';
 
-export const useApi = ({ searchType, endpoint, url }) => {
+export const useApi = ({ endpoint, url }) => {
     const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
-    const dataCache = useRef({});
+    const dataCache = useRef({}); // Referencia persistente para el caché
 
     useEffect(() => {
         const urlApi = import.meta.env.VITE_API_URL;
         const urlFetch = url ? url : `${urlApi}${endpoint}`;
-        const cacheKey = `${searchType}-${endpoint}`;
-        console.log("CACHÉ KEY:", cacheKey);
-        console.log("EL GLOBAL:", dataCache.current[cacheKey]);
-        const cachedData = dataCache.current[cacheKey] || null;
-        console.log("EL GLOBAL:", cachedData);
 
-        // Si los datos están en caché, úsalos
-        if (searchType && cachedData) {
+        // tipo de dato del endpoint
+        const getTypeofData = endpoint.split('/')[1];
+
+        // Crear un cacheKey único para cada búsqueda
+        const cacheKey = `${endpoint}`.replace(/^\/+/, '') 
+        console.log("Cache Key usado:", cacheKey);
+
+        console.log("Contenido inicial de dataCache:", dataCache.current);
+        const cachedData = dataCache.current[cacheKey];
+        console.log("DATOS DE CACHÉ ENCONTRADOS:", cachedData);
+
+        if (cachedData) {
+            console.log("USANDO DATOS DE CACHÉ:", cachedData);
             dispatch({
                 type: 'FETCH_SUCCESS',
-                payload: cachedData,
+                payload: cachedData, // Usamos los datos del caché
             });
-            console.log("USANDO DATOS DE CACHÉ:", cacheKey);
-            return;
+            return; // Si los datos ya están en caché, no hacemos el fetch
         }
 
-        // Si no están en caché, haz el fetch
+        // Si no están en caché, hacer el fetch
         dispatch({ type: 'FETCH_INIT' });
-
         fetch(urlFetch)
             .then((res) => res.json())
             .then((data) => {
-                //console.log("Datos obtenidos del fetch:", data);
-
+                // Formatear los datos según el tipo de búsqueda
                 const formattedData = {
-                    product: data[0],
-                    products: data,
-                    user: data[0],
-                    users: data,
-                    categories: data,
-                    category: data[0],
+                    products: getTypeofData === 'products' ? data : [],
+                    product: getTypeofData === 'product' ? data[0] : {},
+                    users: getTypeofData === 'users' ? data : [],
+                    user: getTypeofData === 'user' ? data[0] : {},
+                    posts: getTypeofData === 'posts' ? data : [],
+                    post: getTypeofData === 'post' ? data[0] : {},
+                    categories: getTypeofData === 'categories' ? data : [],
+                    category: getTypeofData === 'category' ? data[0] : {},
                 };
 
-                // Guarda los datos en caché
+                console.log("Datos a guardar en caché:", formattedData);
                 dataCache.current[cacheKey] = formattedData;
-                //console.log(formattedData, "DATOS GUARDADOS EN CACHÉ")
+                console.log("Contenido de dataCache después de guardar:", dataCache.current);
 
                 dispatch({
                     type: 'FETCH_SUCCESS',
@@ -54,11 +59,10 @@ export const useApi = ({ searchType, endpoint, url }) => {
                 console.error("Error al obtener los datos:", err);
                 dispatch({ type: 'FETCH_FAILURE', payload: err });
             });
-    }, [ searchType, endpoint, url]);
+    }, [endpoint, url]);
 
     return { ...state };
 };
-
 
 
 

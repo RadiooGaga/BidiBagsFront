@@ -6,7 +6,7 @@ import { Card } from '../../components/ProductCards/Card';
 export const AllMyCategories = () => {
 
   const { categories, loading, error } = useApi({
-    endpoint: `/bidi-bags/categories`,
+    endpoint: `/categories`,
     searchType: 'ById',
   });
 

@@ -26,7 +26,7 @@ export const CreateCategory = () => {
    form.append('img', formData.img);
 
         // Solicitud POST a la API del registro
-        fetch(`${apiUrl}/bidi-bags/create-category`, {
+        fetch(`${apiUrl}/create-category`, {
           method: 'POST',
           body: form, // Enviamos los datos como FormData
         })

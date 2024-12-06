@@ -25,7 +25,7 @@ export const FormComponent = React.memo(({ className, fields, text, onSubmit }) 
       [name]: type === 'checkbox' ? checked : type === 'file' ? files[0] : value,
     };
 
-
+    //si el campo es un archivo tipo file y está seleccionado, lee la imagen y la convierte a url
     if (type === 'file' && files[0]) {
       const reader = new FileReader();
       reader.onload = (event) => {
@@ -50,7 +50,7 @@ export const FormComponent = React.memo(({ className, fields, text, onSubmit }) 
       required,
       placeholder,
       autocomplete,
-      wrapperClass, // Cambiado para ser más semántico
+      wrapperClass, // Clase que envuelve el contenido del campo
     } = field;
 
     const commonProps = {
@@ -103,7 +103,7 @@ export const FormComponent = React.memo(({ className, fields, text, onSubmit }) 
         );
         break;
     }
-
+ 
     return wrapperClass ? (
       <div key={name} className={wrapperClass}>
         {fieldContent}
@@ -111,7 +111,9 @@ export const FormComponent = React.memo(({ className, fields, text, onSubmit }) 
     ) : (
       <React.Fragment key={name}>{fieldContent}</React.Fragment>
     );
+    
   };
+
 
   return (
     <>

@@ -36,7 +36,7 @@ export const Login = () => {
       };
 
       // Solicitud POST a la API del registro
-      fetch(`${apiUrl}/bidi-bags/login`, {
+      fetch(`${apiUrl}/login`, {
         method: 'POST', 
         headers: {
           'Content-Type': 'application/json',

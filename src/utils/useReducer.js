@@ -5,6 +5,8 @@ export const INITIAL_STATE = {
     product: {},
     users: [],
     user: {},
+    posts: [],
+    post:{},
     categories:[],
     category:{},
     loading: false,
@@ -22,6 +24,8 @@ export const INITIAL_STATE = {
           product: {}, 
           users: [],
           user: {},
+          posts: [],
+          post:{},
           categories:[], 
           category:{} 
         };
@@ -31,10 +35,13 @@ export const INITIAL_STATE = {
           loading: false,
           products: action.payload.products, 
           product: action.payload.product,
-          categories: action.payload.categories, 
-          category: action.payload.category,
           users: action.payload.users, 
           user: action.payload.user,
+          posts: action.payload.posts, 
+          post: action.payload.post,
+          categories: action.payload.categories, 
+          category: action.payload.category,
+         
         };
       case 'FETCH_FAILURE':
         return { ...state, 
@@ -44,6 +51,8 @@ export const INITIAL_STATE = {
           product: {}, 
           users: [],
           user: {},
+          posts: [],
+          post: {},
           categories:[], 
           category:{} 
         };

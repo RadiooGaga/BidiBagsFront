@@ -15,7 +15,7 @@ export const ById = () => {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const { products, loading, error } = useApi({
-    endpoint: `/bidi-bags/product/${id}`,
+    endpoint: `/products/${id}`,
     searchType: 'ById',
   });
 

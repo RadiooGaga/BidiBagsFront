@@ -71,7 +71,7 @@ export const App = () => {
           <Route path="/register" element={<LoginRegister />} />
           <Route path="/login" element={<Login />} />
 
-          <Route path='/category/:categoryName' element={<ByCategory />} />
+          <Route path='/products/category/:categoryName' element={<ByCategory />} />
           <Route path='/product/:id' element={<ById />} />
 
           <Route path="/account" element={

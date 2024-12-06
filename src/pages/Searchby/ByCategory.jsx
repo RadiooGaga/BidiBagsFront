@@ -15,7 +15,7 @@ export const ByCategory = () => {
   const navigate = useNavigate();
 
   const { products, loading, error } = useApi({
-    endpoint:`/bidi-bags/category/${categoryName}`, 
+    endpoint:`/products/category/${categoryName}`,  
     searchType:'ByCategory'
   }); 
   
@@ -39,7 +39,6 @@ export const ByCategory = () => {
 
 
   const handleSelectionClick = (id) => { 
-    console.log("Haciendo clic en producto con ID:", id);
     navigate(`/product/${id}`);
   };
   
