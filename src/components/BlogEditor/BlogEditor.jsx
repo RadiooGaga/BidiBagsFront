@@ -39,7 +39,7 @@ const handlePost = (formData) => {
     .then(data => {
       if (data.post) {
           console.log('Post creado!');
-          navigate('/blog'); 
+          navigate('/latest-post'); 
       } else {
           throw new Error(data.message || 'Fallo al crear el post');
       }

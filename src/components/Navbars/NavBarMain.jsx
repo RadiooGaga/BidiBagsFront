@@ -8,7 +8,7 @@ export const MainNavBar = () => {
   const navItems = [
     { to: "/", label: "Menu", alt: 'Menu'},
     { to: "/concept", label: "Concept", alt: "Concept" },
-    { to: "/blog", label: "Blog", alt: 'Blog' }
+    { to: "/latest-post", label: "Blog", alt: 'Blog' }
   ];
 
   return (

@@ -22,7 +22,7 @@ import { AllMyCategories } from './admin/AllMyCategories/AllMyCategories';
 import { CreateCategory } from './admin/CreateCategory/CreateCategory';
 import { CreateProduct } from './admin/CreateProduct/CreateProduct';
 import { Stock } from './admin/Stock/Stock';
-import { BlogEditor } from './admin/BlogEditor/BlogEditor';
+import { BlogEditor } from './components/BlogEditor/BlogEditor';
 
 
 import { MyData } from './pages/MyData/MyData';
@@ -67,7 +67,7 @@ export const App = () => {
         <Routes>
           <Route path="/" index element={<AllCategories />} />
           <Route path="/concept" element={<TheDesign />} />
-          <Route path="/blog" element={<Blog />} />
+          <Route path="/latest-post" element={<Blog />} />
           <Route path="/register" element={<LoginRegister />} />
           <Route path="/login" element={<Login />} />
 

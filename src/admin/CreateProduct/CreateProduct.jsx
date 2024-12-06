@@ -10,7 +10,7 @@ export const CreateProduct = () => {
 
   const fields = [
     { name: 'categoryName', label: 'Categoría', type: 'text', required: true },
-    { name: 'collection', label: 'Colección', type: 'text', required: true },
+    { name: 'collectionNameName', label: 'Colección', type: 'text', required: true },
     { name: 'img', label: 'Imagen', type: 'file', required: true },
     { name: 'price', label: 'Precio', type: 'number', required: true },
     { name: 'inStock', label: 'En Stock', type: 'checkbox', className: 'customCheckbox' },
@@ -27,7 +27,7 @@ export const CreateProduct = () => {
    // Crear un FormData para enviar los datos incluyendo la imagen como archivo
    const form = new FormData();
    form.append('categoryName', formData.categoryName);
-   form.append('collection', formData.collection);
+   form.append('collectionName', formData.collection);
    form.append('price', formData.price);
    form.append('inStock', formData.inStock);
    form.append('description', formData.description);
