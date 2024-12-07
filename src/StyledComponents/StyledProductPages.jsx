@@ -27,7 +27,7 @@ const ProductCardDetailed = styled.div `
       display: flex;
       width:100%;
       flex-direction: column;
-      gap: var(--gap-l);
+      gap: var(--gap-m);
     }
     @media screen and (min-width: 770px) and (max-width: 1443px) {
         width: 100%

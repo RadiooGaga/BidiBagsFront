@@ -30,6 +30,10 @@ const { GalleryImgDiv, ProductCardGalleryPic, ContentProduct, Intro, TextContent
             navigate('/account/favorites'); 
         };
 
+        const handleAddToCart = () => {
+            console.log('Producto añadido al carrito:', products);
+        }
+
         return (
             <ProductCardDetailed>
                 <GalleryImgDiv>
@@ -53,7 +57,19 @@ const { GalleryImgDiv, ProductCardGalleryPic, ContentProduct, Intro, TextContent
                     <TextContent>   
                         <Description>
                             <Paragraph>{products.description}</Paragraph>
+                            <Button 
+                        type='button' 
+                        text='AÑADIR AL CARRITO'
+                        colorText='white'
+                        width='180px'
+                        padding='10px'
+                        backgroundColor='var(--color-aubergine)'
+                        hoverBackgroundColor='var(--color-barbiePink)'
+                        tapBackgroundColor='var(--color-pushTheButton)'
+                        onClick={handleAddToCart}
+                        ></Button>
                         </Description> 
+                  
                     </TextContent>
                 </ContentProduct>   
                 <Details>

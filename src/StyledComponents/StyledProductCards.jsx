@@ -74,10 +74,12 @@ const ProductCardGalleryPic = styled.img `
 `
 
 const Intro = styled.div `
+    width:100%;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    width:100%;
+    justify-content: start;
+    gap: var(--gap-xl);
+   
 `
 
 const ContentProduct = styled.div `
@@ -129,14 +131,15 @@ const SpanContent = styled.span `
     justify-content: center;
     width: 100%;
     height: auto;
-    padding: var(--padding-xl);
+    padding: var(--padding-xl) var(--padding-l);
     border-bottom: 1px solid var(--color-text);
 
      @media screen and (max-width: 769px) {
-        padding: var(--padding-m);
+        padding: var(--padding-s) var(--padding-s) var(--padding-l) var(--padding-s);
+        
     }
     @media screen and (min-width: 770px) and (max-width: 1443px) {
-        padding: var(--padding-m);
+        padding: var(--padding-m) ;
         border:none;
     }
     
@@ -152,7 +155,7 @@ const Details = styled.div  `
     border-bottom: 1px solid var(--color-text);
 
    @media screen and (max-width: 769px) {
-        padding: var(--padding-m);
+        padding: var(--padding-s);
     }
     @media screen and (min-width: 770px) and (max-width: 1443px) {
         padding: var(--padding-m);
@@ -163,9 +166,10 @@ const Details = styled.div  `
 const Paragraph = styled.p `
     font-family: var(--font-walkway);
     font-size: var(--font-size-m);
+    margin: 0 0 var(--margin-l) 0;
 
     @media screen and (max-width: 480px) {
-       margin: var(--margin-m) 0;
+       margin: 0 0 var(--margin-m) 0;
        font-size: var(--font-size-s);
     }
 
