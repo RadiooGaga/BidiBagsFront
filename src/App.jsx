@@ -76,8 +76,9 @@ export const App = () => {
 
           <Route path="/account" element={
           <ProtectedRoute required="user">
-            <Account />
+            <Account /> 
           </ProtectedRoute>}>
+            <Route path="shopping-cart" element={<ShoppingCart />} />
             <Route path="my-data" element={<MyData />} />
             <Route path="favorites" element={<MyFavorites />} />
             <Route path="order-status" element={<MyOrderStatus />} />
@@ -98,7 +99,7 @@ export const App = () => {
               <Route path="create-post" element={<BlogEditor />} />
               <Route path="session" element={<Session />} />
           </Route>
-          <Route path="/shopping-cart" element={<ShoppingCart />} />
+          
 
           <Route path="/politicas-de-envio" element={<Shipping />} />
           <Route path="/politica-de-cookies" element={<Cookies />} />

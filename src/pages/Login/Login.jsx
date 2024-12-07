@@ -68,7 +68,7 @@ export const Login = () => {
         if (!data) return; // Evitar procesar si hubo error antes
   
         if (data.success) {
-          console.log("Login exitoso:", data);
+          console.log("Login exitoso:", /*data*/);
   
           // Guardar datos en el almacenamiento local
           localStorage.setItem("token", data.token);
