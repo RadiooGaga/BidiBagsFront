@@ -39,13 +39,10 @@ export const ByCategory = () => {
 
 
   const handleSelectionClick = (id) => { 
-    navigate(`/product/${id}`);
+    navigate(`/products/${id}`);
   };
   
 
-
-
-  
 
   return (
     <ProductsContainer>
@@ -53,8 +50,7 @@ export const ByCategory = () => {
         products.map((product) => (
           <Card
             key={product._id}
-            id={product._id}
-            img={product.img}
+            product={product}
             onClick={() => handleSelectionClick(product._id)}
           />
         ))

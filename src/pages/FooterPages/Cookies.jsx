@@ -1,12 +1,12 @@
 import React from 'react'
 import StyledFooterPages from '../../StyledComponents/StyledFooterPages';
-const { SectionTerms, DivTerms, SectionTermsH3, TermsParagraph, Underline } = StyledFooterPages;
+const { SectionFooterPages, DivTerms, SectionFooterPagesH3, TermsParagraph, Underline } = StyledFooterPages;
 
 export const Cookies = () => {
     return (
-        <SectionTerms>
+        <SectionFooterPages>
         <DivTerms>
-            <SectionTermsH3><strong>Política de Cookies</strong></SectionTermsH3><br />
+            <SectionFooterPagesH3><strong>Política de Cookies</strong></SectionFooterPagesH3><br />
             <TermsParagraph>
             <strong>1. ¿Qué es una Cookie?</strong>
             Una cookie es un pequeño archivo de texto que se almacena en tu dispositivo (ordenador, tablet o 
@@ -58,6 +58,6 @@ export const Cookies = () => {
             <br />
             </TermsParagraph>
             </DivTerms>
-        </SectionTerms>
+        </SectionFooterPages>
       )
 }

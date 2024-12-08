@@ -1,56 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Error } from '../../components/Error/Error';
-import { useApi } from '../../utils/useApi';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../../utils/AuthContext';
-import StyledProductPages from '../../StyledComponents/StyledProductPages';
+import { useApi } from '../../utils/useApi';
 import { CardDetails } from '../../components/ProductCards/CardDetails';
-
-const { ProductsContainer } = StyledProductPages;
+import { Error } from '../../components/Error/Error';
 
 export const ById = () => {
 
   const { id } = useParams();
-  const { user } = useAuth();
+  const { user, toggleFavorite } = useAuth();
   const [isFavorite, setIsFavorite] = useState(false);
+  const navigate = useNavigate();
 
   const { products, loading, error } = useApi({
     endpoint: `/products/${id}`,
     searchType: 'ById',
   });
 
-  // Asegurarse de que los datos del producto se han cargado antes de continuar
   useEffect(() => {
     if (user && user.favorites && products) {
-        const isProductFavorite = user.favorites.some(fav => fav._id === products._id); 
-        setIsFavorite(isProductFavorite);
+      const isProductFavorite = user.favorites.some((fav) => fav._id === products._id);
+      setIsFavorite(isProductFavorite);
     }
-  }, [user, products]); 
- 
+  }, [user, products]);
 
-  if (loading) {
-    <Error text="Cargando el producto" />;
-  }
+  const handleFavoriteClick = () => {
+    if (products) {
+        toggleFavorite(products);
+        setIsFavorite((prevState) => !prevState);  // Cambiar el estado de favoritos
+        navigate('/account/favorites'); // Navegar a la página de favoritos
+      } else {
+        console.error("Producto no definido al intentar agregar/eliminar de favoritos");
+      }
+  };
 
-  if (error) {
-     <Error text="Hubo un error al cargar el producto. Por favor, inténtalo de nuevo." />;
-  }
-  if (!products) {
-    <Error text="No es posible encontrar el producto" />;
-  }
-  
+  const handleAddToCart = () => {
+    console.log('Producto añadido al carrito:', products);
+  };
+
+  if (loading) return <Error text="Cargando el producto" />;
+  if (error) return <Error text="Hubo un error al cargar el producto. Por favor, inténtalo de nuevo." />;
+  if (!products) return <Error text="No es posible encontrar el producto" />;
 
   return (
-  
-    <ProductsContainer>
-      <CardDetails
-        products={products}
-        isFavorite={isFavorite} 
-        setIsFavorite={setIsFavorite} 
-      />
-    </ProductsContainer>
-
+    <CardDetails
+      product={products}
+      isFavorite={isFavorite}
+      onFavoriteClick={handleFavoriteClick}
+      onAddToCart={handleAddToCart}
+    />
   );
 };
-
-

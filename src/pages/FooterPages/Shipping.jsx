@@ -1,12 +1,12 @@
 import React from 'react'
 import StyledFooterPages from '../../StyledComponents/StyledFooterPages';
-const { SectionTerms, DivTerms, SectionTermsH3, TermsParagraph, Underline } = StyledFooterPages;
+const { SectionFooterPages, DivTerms, SectionFooterPagesH3, TermsParagraph, Underline } = StyledFooterPages;
 
 export const Shipping = () => {
   return (
-    <SectionTerms>
+    <SectionFooterPages>
         <DivTerms>
-          <SectionTermsH3><strong>Políticas de envío</strong></SectionTermsH3><br />
+          <SectionFooterPagesH3><strong>Políticas de envío</strong></SectionFooterPagesH3><br />
           <TermsParagraph>
           <strong>1. Tiempos de envío</strong>
           Una vez que tu pedido esté terminado, se procesará para el envío. El tiempo estimado de entrega 
@@ -43,7 +43,7 @@ export const Shipping = () => {
           por favor contáctanos antes de realizar el pedido.
           </TermsParagraph>
         </DivTerms>
-    </SectionTerms>
+    </SectionFooterPages>
   )
    
 }

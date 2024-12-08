@@ -7,7 +7,7 @@ export const AllMyCategories = () => {
 
   const { categories, loading, error } = useApi({
     endpoint: `/categories`,
-    searchType: 'ById',
+    searchType: 'AllMyCategories',
   });
 
   
@@ -29,8 +29,8 @@ export const AllMyCategories = () => {
       ) : (
           categories.map((category) => (
               <Card
-              key={category.categoryName}
-              img={category.img}
+              key={category._id}
+              category={category}
               visibleText={getVisibilityText(category.visible)}
               visibleStyle={{ opacity: category.visible ? "100%" : "30%" }} 
             />          

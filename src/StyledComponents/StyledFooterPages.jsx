@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const SectionTerms = styled.section `
+const SectionFooterPages = styled.section `
     display: flex;
     justify-content: center;
     align-items:center;
@@ -19,13 +19,14 @@ const DivTerms = styled.div `
     width:95%;
     height: auto;
     padding: var(--padding-l);
+    background-color: var(--color-white);
 
     @media screen and (max-width: 480px) {
     padding: var(--padding-s);
 }`
 
 
-const SectionTermsH3 = styled.h3 `
+const SectionFooterPagesH3 = styled.h3 `
     margin-bottom: 20px;
 `
 
@@ -41,4 +42,4 @@ const Underline = styled.span `
 `
 
 
-export default { SectionTerms, DivTerms, SectionTermsH3, TermsParagraph, Underline  }
+export default { SectionFooterPages, DivTerms, SectionFooterPagesH3, TermsParagraph, Underline  }

@@ -1,13 +1,13 @@
 import React from 'react'
 import StyledFooterPages from '../../StyledComponents/StyledFooterPages';
-const { SectionTerms, DivTerms, SectionTermsH3, TermsParagraph, Underline } = StyledFooterPages;
+const { SectionFooterPages, DivTerms, SectionFooterPagesH3, TermsParagraph, Underline } = StyledFooterPages;
 
 
 export const Terms = () => {
   return (
-    <SectionTerms>
+    <SectionFooterPages>
         <DivTerms>
-          <SectionTermsH3><strong>Términos y Condiciones de Compra</strong></SectionTermsH3><br />
+          <SectionFooterPagesH3><strong>Términos y Condiciones de Compra</strong></SectionFooterPagesH3><br />
           <TermsParagraph>
           <strong>1. Introducción</strong>
           Bienvenido a BidiBags. Al realizar una compra en la página web, aceptas los términos y condiciones 
@@ -77,6 +77,6 @@ export const Terms = () => {
 
           </TermsParagraph>
         </DivTerms>
-    </SectionTerms>
+    </SectionFooterPages>
   )
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useApi } from '../../utils/useApi';
-import './Blog.css';
+import StyledBlogPage from '../../StyledComponents/StyledBlogPage';
+const { SectionTheBlog, PostImage, DivTheBlogContent, PostTitle, PostContent } = StyledBlogPage;
 
 export const Blog = () => {
   const { post, loading, error } = useApi({
@@ -19,15 +20,13 @@ export const Blog = () => {
   }
 
   return (
-    <section className='sectionTheBlog' key={post._id}>
-        <img className='postImage' src={post.img} alt={post.title} />
-        <div className='divTheBlogContent'>
-        <h2 className='postTitle'>{post.title}</h2> 
-        <p className='postContent'>{post.content}</p>
-      </div>
-    </section>
+    <SectionTheBlog key={post._id}>
+        <PostImage src={post.img} alt={post.title} />
+        <DivTheBlogContent>
+        <PostTitle>{post.title}</PostTitle> 
+        <PostContent>{post.content}</PostContent>
+      </DivTheBlogContent>
+    </SectionTheBlog>
   );
 };
 
-/*
-        <h2 className='postTitle'>{post.title}</h2> */

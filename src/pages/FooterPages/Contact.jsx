@@ -1,16 +1,16 @@
 import React from 'react'
 import StyledFooterPages from '../../StyledComponents/StyledFooterPages';
-const { SectionTerms, DivTerms, SectionTermsH3, TermsParagraph, Underline } = StyledFooterPages;
+const { SectionFooterPages, DivTerms, SectionFooterPagesH3, TermsParagraph, Underline } = StyledFooterPages;
 
 export const Contact = () => {
   return (
-    <SectionTerms>
+    <SectionFooterPages>
       <DivTerms>
-        <SectionTermsH3>🚧 UNDER CONSTRUCTION 🚧</SectionTermsH3>
+        <SectionFooterPagesH3>🚧 UNDER CONSTRUCTION 🚧</SectionFooterPagesH3>
           <TermsParagraph>
             
           </TermsParagraph>
       </DivTerms>
-    </SectionTerms>
+    </SectionFooterPages>
   )
 }

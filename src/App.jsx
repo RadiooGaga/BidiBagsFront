@@ -72,7 +72,7 @@ export const App = () => {
           <Route path="/login" element={<Login />} />
 
           <Route path='/products/category/:categoryName' element={<ByCategory />} />
-          <Route path='/product/:id' element={<ById />} />
+          <Route path='/products/:id' element={<ById />} />
 
           <Route path="/account" element={
           <ProtectedRoute required="user">

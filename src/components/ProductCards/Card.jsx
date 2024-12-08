@@ -3,17 +3,19 @@ import StyledProductCards from '../../StyledComponents/StyledProductCards';
 const { ProductCard, DivImgProductCard, ProductCardPic, ProductDetails, ProductCardH4 } = StyledProductCards; 
 
 
-export const Card = React.memo(({ img, categoryName, visibleText, visibleStyle, onClick })=> {
+export const Card = React.memo(({ product, category, visibleStyle, visibleText, onClick })=> {
+
+  const isProduct = product != null;
+  const isCategory = category != null;
 
   return (
-    <ProductCard  onClick={onClick} style={visibleStyle}>
+    <ProductCard  onClick={onClick} style={visibleStyle || {}}>
         <DivImgProductCard >
-          <ProductCardPic src={img} /> 
+          <ProductCardPic src={isProduct ? product.img : category.img} /> 
         </DivImgProductCard>
         <ProductDetails>
-          <ProductCardH4>{categoryName}</ProductCardH4>
-          <ProductCardH4>{visibleText}</ProductCardH4> 
-      
+          <ProductCardH4>{isProduct ? '' : category.categoryName}</ProductCardH4>
+          <ProductCardH4>{isProduct ? product.visibleText : visibleText}</ProductCardH4> 
         </ProductDetails>
     </ProductCard>
   )

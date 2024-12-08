@@ -12,7 +12,7 @@ export const AllMyProducts = () => {
     }); 
 
     const handleFavoriteClick = (id) => {
-      navigate(`/product/${id}`)
+      navigate(`/products/${id}`)
   };
 
   
@@ -28,7 +28,7 @@ export const AllMyProducts = () => {
           products.map((product) => (
             <Card
             key={product._id}
-            img={product.img}  
+            product={product}  
             onClick={() => handleFavoriteClick(product._id)}// Navegar al _id
         />
           ))
