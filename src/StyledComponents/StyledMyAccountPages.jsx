@@ -16,6 +16,15 @@ const SectionMyAccount = styled.section `
     }
 `;
 
+const DowloadCsvDiv = styled.div `
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    padding: var(--padding-s);
+
+`
+
 const AccountDiv = styled.div `
     display: flex;
     justify-content: center;
@@ -25,7 +34,7 @@ const AccountDiv = styled.div `
     margin: var(--margin-m);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
     overflow-y: scroll;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     gap: var(--gap-l);
     padding: var(--padding-l);
 
@@ -79,4 +88,4 @@ const FormSection = styled.section `
     gap: var(--gap-s);
 `
 
-export default { SectionMyAccount, AccountDiv, AccountNavDiv, AccountNavUl, StyledLabel, FormSection }
+export default { SectionMyAccount, DowloadCsvDiv, AccountDiv, AccountNavDiv, AccountNavUl, StyledLabel, FormSection }

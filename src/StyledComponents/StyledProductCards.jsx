@@ -145,6 +145,13 @@ const SpanContent = styled.span `
     
 `
 
+const DecisionButtons = styled.div `
+    display:flex;
+    flex-wrap: wrap;
+    gap: var(--gap-m);
+
+`
+
 const Details = styled.div  `
     display: flex;
     justify-content: center;
@@ -205,6 +212,7 @@ export default {
     ProductCardH4,
     SpanContent,
     Description,
+    DecisionButtons,
     Details,
     ProductCardGalleryPic,
     Paragraph,

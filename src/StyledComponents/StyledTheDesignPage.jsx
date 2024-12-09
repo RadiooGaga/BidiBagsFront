@@ -2,96 +2,109 @@ import styled from "styled-components";
 
 const SectionTheDesign = styled.section `
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    flex-wrap:wrap;
+    align-items:center;
     width: 95%;
     min-height: 80vh;
     box-sizing: border-box;
-
-    @media screen and (max-width: 768px){
-        padding: var(--padding-m);
-    }
+    padding: var(--padding-l) var(--padding-m);
+    margin-bottom: var(--margin-l);
 `
 
-const DivDesignStory = styled.div `
+const DesignStory = styled.div `
+    width: 40%;
+    float:left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 30px; /* Espacio entre el texto y la imagen */
+
+    @media screen and (max-width: 768px) {
+        width: 100%;
+          margin-right: 0px; 
+          float: none;
+    }
+`;
+
+
+const Figure = styled.figure `
+    display: flex;
     width: 100%;
-    min-height: 80%;
-    text-align: left;
+    height:auto;
+    flex-direction: column;
 
-    @media screen and (max-width: 480px) {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
+    @media screen and (max-width: 768px){
+        align-items: flex-start;
         width: 100%;
-        margin: 0 auto;
-        text-align: center;
-        align-items: center;
     }
 
-    @media screen and (min-width: 481px) and (max-width: 768px){
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        width: 100%;
-        margin: 0 auto;
-        text-align: center;
-        align-items: center;
-    }
 `
 
 const DesignerImg = styled.img `
-    float: left; /* texto envuelve imagen */
     max-width: 34em;
-    padding: 0 30px 12px 30px;
+    margin: 30px 0 30px 30px;
     object-fit: cover;
     /*filter: grayscale(100%);*/
 
-    @media screen and (max-width: 768px){
-        max-width: 100%;
-    }
-
-    @media screen and (min-width: 1444px) and (max-width: 1919px) {
-        margin-bottom: var(--margin-l);
-    }
+ @media screen and (max-width: 768px){
+    width:100%;
+    margin:0;
+    padding: 0 var(--padding-m);
+ }
     
 `
 
+const FigCaption = styled.figcaption `
+    display: flex;
+    font-family: var( --font-walkway);
+    color: var(--color-text);
+    font-weight: 100;
+    font-size: var(--font-size-s);
+    padding: 0 30px 12px 30px;
+    align-self: flex-start;
+
+    @media screen and (max-width: 768px) {
+         padding: 0 0 0 var(--padding-m);
+    }
+
+`
 
 const DesignStoryH2 = styled.h2 `
     font-family: var( --font-sansation);
     font-weight: 100;
     font-size: var(--font-size-m);
     color: var(--color-text);
-    margin: 0 var(--margin-m);
+    margin-left:30px;
+
+    @media screen and (max-width: 768px) {
+        padding: 0 0 var(--padding-m);
+    }
+
 `
 
 const DesignStoryParagraph = styled.p `
-    font-weight: 100;
-    text-align: justify;
-    padding: var(--padding-l)
+    display:flex;
+    flex-wrap;wrap;
+    width: 50%;
+    flex: 1 1 auto;
+    margin: 0;
+    padding: var(--padding-m);
+    z-index:1;
+ 
 
-    @media screen and (max-width: 480px) {
-        text-align: justify;
-        padding: var(--padding-m)
-    }
-
-    @media screen and (min-width: 481px) and (max-width: 768px){
-        text-align: justify;
-        padding: var(--padding-l)
-    }
-
-    @media screen and (min-width: 769px) and (max-width: 1023px){
-        text-align: justify;
-        padding: var(--padding-m)
-    }
-
-`
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+`;
 
 
 
 export default { 
     SectionTheDesign,
-    DivDesignStory,
+    DesignStory,
+    Figure,
+    FigCaption,
     DesignerImg,
     DesignStoryH2,
     DesignStoryParagraph
