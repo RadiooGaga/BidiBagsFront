@@ -33,8 +33,9 @@ export const ByCategory = () => {
   }
   
   if (!products || products.length === 0) {
-    return <Loading
-    text={`No se encontraron productos en la categoría "${categoryName}"`} />;
+    return (
+      <p>{`No existen productos para la categoría ${categoryName}`}</p>
+    )
   }
 
 

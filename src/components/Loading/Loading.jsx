@@ -18,9 +18,7 @@ export const Loading = ({ loading, text, message }) => {
         <div className='loading'>{text}</div>
       ) : (
         showNoProductsMessage && (
-          <div className='noProductsFound'>
-            {message.toUpperCase()} 
-          </div>
+          <div className='noProductsFound'> {message} </div>
         )
       )}
     </div>
