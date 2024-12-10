@@ -33,6 +33,7 @@ export const MyFavorites = () => {
     fetchFavorites();
   }, [user]);
 
+
   const handleClickOnFavorite = (id) => {
     navigate(`/products/${id}`);
   };
@@ -43,13 +44,11 @@ export const MyFavorites = () => {
       <FavoritesDiv>
         {favoriteProducts && favoriteProducts.length > 0 ? (
           favoriteProducts.map((product) => {
-            // Cada producto ahora es un objeto con todos sus datos
-            console.log('Producto actual del map:', product);
             return (
               <Card
-                key={product._id} // Importante para evitar errores en la lista
-                product={product} // Pasar todo el objeto producto
-                onClick={() => handleClickOnFavorite(product._id)} // Navegar al producto
+                key={product._id} 
+                product={product} 
+                onClick={() => handleClickOnFavorite(product._id)} 
               />
             );
           })

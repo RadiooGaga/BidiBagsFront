@@ -4,7 +4,7 @@ import { useAuth } from '../../utils/AuthContext';
 import { Button } from '../../components/Button/Button';
 import { FormComponent } from '../../components/FormComponent/FormComponent';
 import StyledUserAccount from '../../StyledComponents/StyledUserAccount';
-const { UserAccountDiv, DataDiv, ByeMessage } = StyledUserAccount;
+const { UserAccountDiv, SessionDiv, ByeMessage } = StyledUserAccount;
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -73,7 +73,7 @@ export const Session = () => {
 
   return (
     <UserAccountDiv>
-      <DataDiv>
+      <SessionDiv>
       <FormComponent
         text="MODIFICAR DATOS"
         fields={fields}
@@ -92,7 +92,7 @@ export const Session = () => {
       />
       {message && 
       <ByeMessage>{message}</ByeMessage>}
-      </DataDiv>
+      </SessionDiv>
     </UserAccountDiv>
   );
 };

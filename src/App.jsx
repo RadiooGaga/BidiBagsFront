@@ -79,7 +79,7 @@ export const App = () => {
             <Account /> 
           </ProtectedRoute>}>
             <Route path="shopping-cart" element={<ShoppingCart />} />
-            <Route path="my-data" element={<MyData />} />
+            <Route path="my-data/:id" element={<MyData />} />
             <Route path="favorites" element={<MyFavorites />} />
             <Route path="order-status" element={<MyOrderStatus />} />
             <Route path="changes-and-returns" element={<MyChanges />} />

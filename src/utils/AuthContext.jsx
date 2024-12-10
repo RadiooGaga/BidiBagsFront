@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
 
   // Método para iniciar sesión
   const login = (userData, authToken) => {
-    console.log('Usuario recibido al iniciar sesión:',/* userData*/); // Verifica qué campos incluye
+    console.log('Usuario recibido al iniciar sesión:',/* userData*/); 
     setUser(userData);
     setToken(authToken);
     localStorage.setItem('user', JSON.stringify(userData));

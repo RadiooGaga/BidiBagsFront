@@ -29,21 +29,16 @@ const ProductCardDetailed = styled.div `
       flex-direction: column;
       gap: var(--gap-m);
     }
+      
     @media screen and (min-width: 770px) and (max-width: 1443px) {
         width: 100%
     }
+
+    @media screen and (min- width: 1444px) and (max-width: 1919px) {
+        width: 100%;
+    }
    
 `
-/*
-const ProductCardContainer = styled.div `
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    width: 90%;
-    min-height: 80vh;
-    box-sizing: border-box;
-    padding: var(--padding-s);
-    background-color: blue;
-`
-*/
-export default { ProductsContainer, ProductCardDetailed,/* ProductCardContainer*/ }
+
+
+export default { ProductsContainer, ProductCardDetailed }

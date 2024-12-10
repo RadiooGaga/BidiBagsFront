@@ -9,7 +9,7 @@ const CategoryContainer  = styled.div `
     align-items: center;
     text-align: center;
     width: 50%;
-    min-height: 80vh;
+    min-height: 70vh;
     gap: var(--gap-m);
     box-sizing: border-box;
 
@@ -50,7 +50,7 @@ const CategoryContainer  = styled.div `
     }
 
     @media screen and (min-width: 1444px) and (max-width: 1919px) {
-            width:60%;
+            min-width: 50%;
     }
 `
 

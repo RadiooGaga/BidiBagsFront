@@ -1,13 +1,16 @@
 import React from 'react';
 import {  NavLink } from 'react-router-dom';
 import StyledMyAccountPages from '../../StyledComponents/StyledMyAccountPages';
+import { useAuth } from '../../utils/AuthContext';
 const { AccountNavDiv, AccountNavUl, StyledLabel } = StyledMyAccountPages; 
 
 
 export const NavBarAccount = () => {
 
+  const { user } = useAuth()
+
   const navItems = [
-    { to: "my-data", label: "MIS DATOS", alt: "myData"},
+    { to: `my-data/${user._id}`, label: "MIS DATOS", alt: "myData"},
     { to: "favorites", label: "MIS FAVORITOS", alt: "myFavorites"},
     { to: "order-status", label: "ESTADO DEL PEDIDO", alt: "myOrderStatus"},
     { to: "changes-and-returns", label: "CAMBIOS / DEVOLUCIONES", alt: "myChanges"},

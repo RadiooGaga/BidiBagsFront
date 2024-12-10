@@ -6,12 +6,15 @@ import { Card } from '../../components/ProductCards/Card';
 import StyledMyAccountPages from '../../StyledComponents/StyledMyAccountPages';
 const { DowloadCsvDiv } = StyledMyAccountPages;
 
+
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const AllMyProducts = () => {
   
   const navigate = useNavigate();
     const { products, loading, error } = useApi({
       endpoint:`/products`, 
-      searchType:'AllMyProducts'
+      url:''
     }); 
 
     const handleFavoriteClick = (id) => {
@@ -21,13 +24,13 @@ export const AllMyProducts = () => {
 
     const handleDownloadCsv = async () => {
       try {
-        const token = localStorage.getItem('token'); // Asegúrate de obtener el token almacenado
+        const token = localStorage.getItem('token'); // sacar el token almacenado
         if (!token) throw new Error("No se encontró el token");
 
-        const response = await fetch('http://localhost:3005/products/export/csv', {
+        const response = await fetch(`${apiUrl}/products/export/csv`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`, // Incluye el token en el encabezado
+                'Authorization': `Bearer ${token}`, // incluir el token en el encabezado
             },
         });
           const blob = await response.blob();

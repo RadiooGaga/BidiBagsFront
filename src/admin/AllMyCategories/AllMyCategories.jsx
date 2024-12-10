@@ -7,7 +7,7 @@ export const AllMyCategories = () => {
 
   const { categories, loading, error } = useApi({
     endpoint: `/categories`,
-    searchType: 'AllMyCategories',
+    url: '',
   });
 
   
