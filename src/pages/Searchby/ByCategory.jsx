@@ -16,7 +16,7 @@ export const ByCategory = () => {
 
   const { products, loading, error } = useApi({
     endpoint:`/products/category/${categoryName}`,  
-    searchType:'ByCategory'
+    url:''
   }); 
   
   if (loading) return (

@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { FormComponent } from '../../components/FormComponent/FormComponent';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../utils/AuthContext';
-import './Login.css'
+import StyledLoginRegister from '../../StyledComponents/StyledLoginRegister';
+const { SectionLoginRegister, ErrorMessageDiv } = StyledLoginRegister
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -98,9 +99,9 @@ export const Login = () => {
   
 
   return (
-    <section className='sectionLogin'>
-        {errorMessage && ( <div className="errorMessage">{errorMessage}</div>)}
+    <SectionLoginRegister>
+        {errorMessage && ( <ErrorMessageDiv>{errorMessage}</ErrorMessageDiv>)}
       <FormComponent fields={fields} text={text} onSubmit={handleLogin} />
-    </section>
+    </SectionLoginRegister>
   );
 };

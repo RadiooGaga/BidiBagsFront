@@ -14,7 +14,7 @@ export const ById = () => {
 
   const { products, loading, error } = useApi({
     endpoint: `/products/${id}`,
-    searchType: 'ById',
+    url: '',
   });
 
   useEffect(() => {

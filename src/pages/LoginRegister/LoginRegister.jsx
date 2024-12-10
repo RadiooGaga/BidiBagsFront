@@ -3,7 +3,8 @@ import { Button } from '../../components/Button/Button';
 import { FormComponent } from '../../components/FormComponent/FormComponent';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../utils/AuthContext';
-import './LoginRegister.css'
+import StyledLoginRegister from '../../StyledComponents/StyledLoginRegister';
+const { SectionLoginRegister, AccountAlreadyDiv,AccountAlreadyP, ErrorMessageDiv } = StyledLoginRegister
 
 
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -87,9 +88,9 @@ export const LoginRegister = () => {
   };
 
   return (
-    <section className='sectionRegister'>
+    <SectionLoginRegister>
       {user ? (
-        <div className="already-logged">
+        <div>
           <p>Ya estás registrado y autenticado. Serás redirigido a tu cuenta.</p>
         </div>
       ) : (
@@ -97,13 +98,13 @@ export const LoginRegister = () => {
       )}
   
       {errorMessage && ( // Renderizar el mensaje de error si existe
-        <div className='errorMessageDiv'>
+        <ErrorMessageDiv>
           {errorMessage}
-        </div>
+        </ErrorMessageDiv>
       )}
   
-      <div className='accountAlreadyDiv'>
-        <p className='registerFormP'>¿YA TIENES UNA CUENTA?</p>
+      <AccountAlreadyDiv>
+        <AccountAlreadyP>¿YA TIENES UNA CUENTA?</AccountAlreadyP>
   
         <Button
           type="button"
@@ -116,8 +117,8 @@ export const LoginRegister = () => {
           padding="15px"
           onClick={handleClick}
         />
-      </div>
-    </section >
+      </AccountAlreadyDiv>
+    </SectionLoginRegister >
   );
 };
 
