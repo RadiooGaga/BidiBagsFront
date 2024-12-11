@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useApi } from '../../utils/useApi';
 import { Card } from '../../components/ProductCards/Card';
 
@@ -8,8 +8,10 @@ export const AllMyCategories = () => {
   const { categories, loading, error } = useApi({
     endpoint: `/categories`,
     url: '',
+    useCache: false,
   });
 
+  console.log(categories, "LAS CATEGORÍAS, NIÑA")
   
   const getVisibilityText = (visible) => {
     return visible ? "Visible: Sí" : "Visible: No";

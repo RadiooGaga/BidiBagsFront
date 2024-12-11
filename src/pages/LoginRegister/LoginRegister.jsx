@@ -59,7 +59,12 @@ export const LoginRegister = () => {
     .then(res => {
       if (!res.ok) {
           if (res.status === 404) throw new Error('404: Usuario no encontrado');
-          if (res.status === 409) throw new Error('409: El usuario ya existe');
+          if (res.status === 409) {
+            setTimeout(() => {
+              navigate('/login');
+            }, 1500); 
+            throw new Error('El usuario ya existe');  
+          }
           if (res.status === 500) throw new Error('500: Error en el servidor');
           throw new Error(`Error ${res.status}: ${res.statusText}`);
       }
@@ -68,8 +73,8 @@ export const LoginRegister = () => {
     .then(data => {
       if (data.success) {
           console.log(data, 'Registro exitoso!');
-          login(data.user, data.token); // Actualizar contexto
-          navigate('/account'); // Redirigir al área de cuenta
+          login(data.user, data.token); // Actualizar context
+          navigate('/account'); 
       } else {
           setErrorMessage(data.message || 'Hubo un error al registrar el usuario');
           setTimeout(() => setErrorMessage(''), 2000);

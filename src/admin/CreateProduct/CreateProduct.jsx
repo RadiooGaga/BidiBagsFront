@@ -10,7 +10,7 @@ export const CreateProduct = () => {
 
   const fields = [
     { name: 'categoryName', label: 'Categoría', type: 'text', required: true },
-    { name: 'collectionNameName', label: 'Colección', type: 'text', required: true },
+    { name: 'collectionName', label: 'Colección', type: 'text', required: true },
     { name: 'img', label: 'Imagen', type: 'file', required: true },
     { name: 'price', label: 'Precio', type: 'number', required: true },
     { name: 'inStock', label: 'En Stock', type: 'checkbox', className: 'customCheckbox' },
@@ -48,7 +48,9 @@ export const CreateProduct = () => {
         .then((data) => {
           if (data.success) {
             console.log(data, 'Producto creado!');
-            navigate('/all-products'); // Redirigir a todos los productos
+            //localStorage.removeItem('products');
+            //localStorage.setItem('products', JSON.stringify(data.products));
+            navigate('/all-products'); 
           } else {
             setErrorMessage(data.message || 'Hubo un error al subir el producto');
             setTimeout(() => setErrorMessage(''), 2000);

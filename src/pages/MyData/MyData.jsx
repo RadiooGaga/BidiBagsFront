@@ -16,15 +16,7 @@ export const MyData = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-/*
-  const fields = [
-    { name: 'userName', label: 'Nombre', type: 'text', autocomplete: 'given-name', required: true },
-    { name: 'userSurname', label: 'Apellidos', type: 'text', autocomplete: 'family-name', required: true },
-    { name: 'street', label: 'Calle', type: 'text',  required: true },
-    { name: 'city', label: 'Ciudad', type: 'text',  required: true },
-    { name: 'postalCode', label: 'Codigo Postal', type: 'number', required: true },
-    { name: 'country', label: 'Pais', type: 'text', required: true },
-  ];*/
+
 
   useEffect(() => {   
     if (user && token) {

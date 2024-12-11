@@ -14,7 +14,7 @@ export const Card = React.memo(({ product, category, visibleStyle, visibleText, 
           <ProductCardPic src={isProduct ? product.img : category.img} /> 
         </DivImgProductCard>
         <ProductDetails>
-          <ProductCardH4>{isProduct ? '' : category.categoryName}</ProductCardH4>
+          <ProductCardH4>{isProduct ? product.collectionName : category.categoryName}</ProductCardH4>
           <ProductCardH4>{isProduct ? product.visibleText : visibleText}</ProductCardH4> 
         </ProductDetails>
     </ProductCard>

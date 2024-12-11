@@ -43,7 +43,9 @@ export const AuthProvider = ({ children }) => {
 
   const updateUser = async (newUserData) => {
     try {
-      // solicitud al backend para actualizar el usuario
+      
+      console.log('datos enviados al backend:', newUserData)
+
       const response = await fetch(`${apiUrl}/update-user/${user._id}`, {
         method: 'PUT', 
         headers: {
@@ -110,4 +112,3 @@ const toggleFavorite = (product) => {
     </AuthContext.Provider>
   );
 };
-

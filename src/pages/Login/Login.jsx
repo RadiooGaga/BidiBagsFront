@@ -49,13 +49,16 @@ export const Login = () => {
           // Manejo de errores según el código de estado
           switch (res.status) {
             case 400:
-              setErrorMessage('400: Contraseña incorrecta');
+              setErrorMessage('Contraseña incorrecta');
               break;
             case 404:
-              setErrorMessage('404: Usuario no encontrado; revise el formulario');
+              setErrorMessage('El ususario no existe');
+              setTimeout(() => {
+                navigate('/register');
+              }, 1500);  
               break;
             case 500:
-              setErrorMessage('500: Error en el servidor');
+              setErrorMessage('Error en el servidor');
               break;
             default:
               setErrorMessage(`Error ${res.status}: ${res.statusText}`);

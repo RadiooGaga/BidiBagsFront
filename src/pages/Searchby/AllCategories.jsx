@@ -14,7 +14,7 @@ export const AllCategories = () => {
 
     const { categories, loading, error } = useApi({
         endpoint: `/categories`,
-        url: '',
+        url: ''
     });
 
     // Filtrar las categorías visibles cuando las categorías cambian

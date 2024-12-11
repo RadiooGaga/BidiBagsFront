@@ -48,7 +48,7 @@ const UserAccountDiv = styled.div `
     align-items: flex-start;
     width: 100%;
     min-height: 60vh;
-    margin: var(--margin-m);
+    margin-bottom: var(--margin-m);
     flex-wrap:wrap;
     padding: var(--padding-s);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
@@ -62,7 +62,7 @@ const SessionDiv = styled.div `
     align-items: center;
     width: 100%;
     min-height: 60vh;
-    padding: var(--padding-s);
+    padding: var(--padding-l) var(--padding-s) var(--padding-s) var(--padding-s);
     overflow-y: scroll;
 `
 

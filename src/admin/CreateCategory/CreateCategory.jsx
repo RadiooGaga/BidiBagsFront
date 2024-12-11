@@ -14,7 +14,7 @@ export const CreateCategory = () => {
     { name: 'visible', label: 'Visible', type: 'checkbox', className: 'customCheckbox' }
   ];
 
-  const handleRegister = (formData) => {
+  const handleCreateCategory = (formData) => {
     if (!formData.img) {
       setErrorMessage('Por favor selecciona una imagen.');
       return;
@@ -38,7 +38,9 @@ export const CreateCategory = () => {
         })
         .then((data) => {
           if (data.success) {
-            console.log(data, 'Categoría creada!');
+            console.log(data, "categoría creada!")
+            //localStorage.removeItem('categories');
+            //refetch()
             navigate('/'); 
           } else {
             setErrorMessage(data.message || 'Hubo un error al subir la categoría');
@@ -54,8 +56,26 @@ export const CreateCategory = () => {
 
   return (
     <>
-      <FormComponent fields={fields} text="SUBIR CATEGORÍA" onSubmit={handleRegister} />
+      <FormComponent fields={fields} text="SUBIR CATEGORÍA" onSubmit={handleCreateCategory} />
       {errorMessage && <p>{errorMessage}</p>}
       </>
   );
 };
+
+
+
+/*
+
+// Al borrar una categoría o hacer cambios
+const handleDeleteCategory = async (categoryId) => {
+  const response = await fetch(`${apiUrl}/categories/${categoryId}`, {
+    method: 'DELETE',
+  });
+  if (response.ok) {
+    // Elimina el caché de categorías
+    localStorage.removeItem('categories'); 
+    // Realiza una nueva solicitud para obtener las categorías actualizadas
+    refetch(); // Si usas un hook como useApi que permita refetch
+  }
+};
+*/

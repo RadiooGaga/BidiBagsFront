@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from "framer-motion"
 
-export const Button = ({ type, text, width, backgroundColor, colorText, padding, hoverBackgroundColor, 
+export const Button = ({ type, text, width, margin, backgroundColor, colorText, padding, hoverBackgroundColor, 
   tapBackgroundColor,  onClick, children }) => {
     
     return (
@@ -9,6 +9,7 @@ export const Button = ({ type, text, width, backgroundColor, colorText, padding,
           type={type}
           style={{
           width: width,
+          margin: margin,
           backgroundColor: backgroundColor,
           color: colorText,
           padding: padding,

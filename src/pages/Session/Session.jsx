@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../utils/AuthContext';
 import { Button } from '../../components/Button/Button';
-import { FormComponent } from '../../components/FormComponent/FormComponent';
+import { FormUpdateUser } from '../../components/FormUpdateUser/FormUpdateUser';
 import StyledUserAccount from '../../StyledComponents/StyledUserAccount';
 const { UserAccountDiv, SessionDiv, ByeMessage } = StyledUserAccount;
 
@@ -15,13 +15,27 @@ export const Session = () => {
   const navigate = useNavigate();
 
   const fields = [
-    { name: 'email', label: 'Email', type: 'email', placeholder: 'tuemail@gmail.com', required: true },
-    { name: 'password', label: 'Contraseña', type: 'password', placeholder: '*************', required: true },
+    { name: 'email', label: 'Email', for: 'email', type: 'email', placeholder: 'tuemail@gmail.com', autocomplete: 'email', required: true },
+    { name: 'password', label: 'Contraseña', for: 'password',  type: 'password', placeholder: '*************', autocomplete: 'current-password', required: true },
+    { name: 'shippingAdress', label: 'Dirección de Envío', for: 'shippingAdress',
+      fields: [
+        { name: 'street', label: '', for: 'street', placeholder: 'Dirección de envío', type: 'text', required: true },
+        { name: 'city', label: 'Ciudad', for: 'city', type: 'text', required: true },
+        { name: 'postalCode', label: 'Código Postal', for:  'postalCode',  type: 'text', required: true },
+      ],
+    },
+    { name: 'billingAdress', label: 'Dirección de Facturación',
+      fields: [
+        { name: 'street2', label: '', placeholder: 'Dirección de facturación', type: 'text', required: true },
+        { name: 'city2', label: 'Ciudad', type: 'text',  required: true },
+        { name: 'postalCode2', label: 'Código Postal', type: 'text', required: true },
+      ],
+    },
   ];
 
   const handleUpdate = (formData) => {
 
-    const userId = user._id || user.id; 
+    const userId = user._id; 
     const hasEmptyFields = Object.values(formData).some(value => !value);
     if (hasEmptyFields) { 
       setMessage("Complete el formulario");
@@ -33,6 +47,9 @@ export const Session = () => {
     const requestData = {
       email: formData.email,
       password: formData.password,
+      shippingAddress: formData.shippingAdress,
+      billingAddress: formData.billingAdress,    
+      paymentMethods: formData.paymentMethods,
     };
 
     // Actualiza el usuario en el backend
@@ -74,7 +91,7 @@ export const Session = () => {
   return (
     <UserAccountDiv>
       <SessionDiv>
-      <FormComponent
+   <FormUpdateUser
         text="MODIFICAR DATOS"
         fields={fields}
         onSubmit={handleUpdate}
@@ -83,6 +100,7 @@ export const Session = () => {
         type="button"
         text="CERRAR SESIÓN"
         width='260px'
+        margin='30px 0 30px 0'
         backgroundColor="var(--color-barbiePink)"
         colorText="white"
         hoverBackgroundColor="var(--color-aubergine)"
