@@ -75,36 +75,40 @@ export const AuthProvider = ({ children }) => {
 
 
   // Método para añadir o eliminar productos de favoritos
-const toggleFavorite = (product) => {
-  console.log(product, "EL PRODUCTO QUE SE ALMACENA EN CÓDIGO TOGGLE");
-
-  if (!user || !user.favorites) {
-    console.error("El usuario no está autenticado o no tiene favoritos inicializados.");
-    return;
-  }
-
-  const productId = product._id;
-  if (!productId) {
-    console.error("Producto inválido proporcionado a toggleFavorite:", productId);
-    return;
-  }
-
-  // Verificar si el producto ya está en los favoritos
-  const isFavorite = user.favorites.some(item => item._id === productId);
-
-  // Crear una lista actualizada de favoritos
-  const updatedFavorites = isFavorite
-    ? user.favorites.filter(item => item._id !== productId) // Eliminar si ya está
-    : [...user.favorites, product]; // Agregar si no está
-
-  // Actualizar los favoritos del usuario
-  try {
-    updateUser({ favorites: updatedFavorites });
-    console.log("USUARIO ACTUALIZADO!");
-  } catch (error) {
-    console.error("Error al actualizar los favoritos:", error);
-  }
-};
+  const toggleFavorite = async (product) => {
+    console.log(product, "EL PRODUCTO QUE SE ALMACENA EN CÓDIGO TOGGLE");
+  
+    if (!user || !user.favorites) {
+      console.error("El usuario no está autenticado o no tiene favoritos inicializados.");
+      return;
+    }
+  
+    const productId = product._id;
+    if (!productId) {
+      console.error("Producto inválido proporcionado a toggleFavorite:", productId);
+      return;
+    }
+  
+    // Verificar si el producto ya está en los favoritos
+    const isFavorite = user.favorites.some(item => item.toString() === productId.toString());
+  
+    let updatedFavorites;
+    if (isFavorite) {
+      // Si ya está, lo eliminamos
+      updatedFavorites = user.favorites.filter(item => item.toString() !== productId.toString());
+    } else {
+      // Si no está, lo agregamos
+      updatedFavorites = [...user.favorites, productId]; // Solo agregamos el ID del producto
+    }
+  
+    // Actualizar los favoritos del usuario en el backend
+    try {
+      await updateUser({ favorites: updatedFavorites }); 
+      console.log("USUARIO ACTUALIZADO!");
+    } catch (error) {
+      console.error("Error al actualizar los favoritos:", error);
+    }
+  };
 
   return (
     <AuthContext.Provider value={{ user, token, login, logout, updateUser, toggleFavorite }}>

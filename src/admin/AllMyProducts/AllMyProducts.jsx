@@ -15,7 +15,6 @@ export const AllMyProducts = () => {
     const { products, loading, error } = useApi({
       endpoint:`/products`, 
       url:'',
-      useCache: false,
     }); 
 
     const handleFavoriteClick = (id) => {

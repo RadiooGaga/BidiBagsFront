@@ -25,6 +25,7 @@ export const ById = () => {
   }, [user, products]);
 
   const handleFavoriteClick = () => {
+    
     if (products) {
         toggleFavorite(products);
         setIsFavorite((prevState) => !prevState);  // Cambiar el estado de favoritos

@@ -27,7 +27,7 @@ export const CreateProduct = () => {
    // Crear un FormData para enviar los datos incluyendo la imagen como archivo
    const form = new FormData();
    form.append('categoryName', formData.categoryName);
-   form.append('collectionName', formData.collection);
+   form.append('collectionName', formData.collectionName);
    form.append('price', formData.price);
    form.append('inStock', formData.inStock);
    form.append('description', formData.description);
@@ -48,8 +48,6 @@ export const CreateProduct = () => {
         .then((data) => {
           if (data.success) {
             console.log(data, 'Producto creado!');
-            //localStorage.removeItem('products');
-            //localStorage.setItem('products', JSON.stringify(data.products));
             navigate('/all-products'); 
           } else {
             setErrorMessage(data.message || 'Hubo un error al subir el producto');

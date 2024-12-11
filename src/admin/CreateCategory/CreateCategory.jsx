@@ -39,9 +39,7 @@ export const CreateCategory = () => {
         .then((data) => {
           if (data.success) {
             console.log(data, "categoría creada!")
-            //localStorage.removeItem('categories');
-            //refetch()
-            navigate('/'); 
+            navigate('/categories'); 
           } else {
             setErrorMessage(data.message || 'Hubo un error al subir la categoría');
             setTimeout(() => setErrorMessage(''), 2000);

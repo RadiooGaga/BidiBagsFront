@@ -1,47 +1,33 @@
 import { useEffect, useReducer } from 'react';
 import { INITIAL_STATE, reducer } from './useReducer';
 
-export const useApi = ({ endpoint, url, useCache = true }) => {
+export const useApi = ({ endpoint, url }) => {
     const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
     useEffect(() => {
-        // Definir la URL final para la API, tomando en cuenta la URL base y el endpoint
         const urlApi = import.meta.env.VITE_API_URL;
         const urlFetch = url || `${urlApi}${endpoint}`;
-
-        // Si no se usa caché, hacemos la llamada a la API directamente
-        if (!useCache) {
-            fetchData(urlFetch);
-            return;
-        }
-
+        
         // Crea un cacheKey único para cada búsqueda (elimina las barras iniciales y finales)
-        const cacheKey = endpoint.replace(/^\/+|\/+$/g, '');
-        const cachedData = JSON.parse(localStorage.getItem(cacheKey));
+        const cacheKey = endpoint.replace(/^\/+|\/+$/g, ''); 
+        // Comprueba si el caché ya contiene datos para esta clave
+        const cachedData = JSON.parse(localStorage.getItem(cacheKey)); 
 
         if (cachedData) {
+            // Si encontramos los datos en el caché, los usamos en el payload
             console.log("USANDO DATOS DE CACHÉ:", cachedData);
-            // Si los datos están en caché, actualizamos el estado con esos datos
             dispatch({
                 type: 'FETCH_SUCCESS',
                 payload: cachedData,
             });
-            return; // Evitamos hacer la llamada a la API si ya tenemos datos en caché
+            return; 
         }
 
-        // Si no hay datos en caché, hacemos la llamada a la API
-        fetchData(urlFetch);
-
-    }, [endpoint, url, useCache]); // Dependencias del useEffect
-
-    // Función que hace la solicitud a la API
-    const fetchData = (urlFetch) => {
         dispatch({ type: 'FETCH_INIT' });
-
         fetch(urlFetch)
             .then((res) => res.json())
             .then((data) => {
-                // Formateamos los datos según el tipo de búsqueda
+                // Formateamos los datos según el tipo de búsqueda (tomando el tipo de endpoint)
                 const getTypeofData = endpoint.split('/')[1];
                 const formattedData = {
                     products: getTypeofData === 'products' ? data : [],
@@ -54,11 +40,8 @@ export const useApi = ({ endpoint, url, useCache = true }) => {
                     category: getTypeofData === 'category' ? data[0] : {},
                 };
 
-                // Si useCache es true, guardamos los datos en caché en localStorage
-                if (useCache) {
-                    const cacheKey = endpoint.replace(/^\/+|\/+$/g, '');
-                    localStorage.setItem(cacheKey, JSON.stringify(formattedData)); 
-                }
+                // Guardamos los datos en caché en localStorage
+                //localStorage.setItem(cacheKey, JSON.stringify(formattedData)); 
 
                 // Despachamos los datos al estado
                 dispatch({
@@ -70,7 +53,11 @@ export const useApi = ({ endpoint, url, useCache = true }) => {
                 console.error("Error al obtener los datos:", err);
                 dispatch({ type: 'FETCH_FAILURE', payload: err });
             });
-    };
+    }, [endpoint, url]); 
 
     return { ...state };
 };
+
+
+
+

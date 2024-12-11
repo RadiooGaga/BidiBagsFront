@@ -11,7 +11,10 @@ export const MyFavorites = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [favoriteProducts, setFavoriteProducts] = useState([]);
-  
+
+  useEffect(() => {
+    console.log(favoriteProducts, "ESTADO DE FAVORITOS");
+  }, [favoriteProducts]);
 
   useEffect(() => {
     const fetchFavorites = async () => {
@@ -23,7 +26,14 @@ export const MyFavorites = () => {
               fetch(`${apiUrl}/products/${id}`).then((res) => res.json())
             )
           );
-          setFavoriteProducts(responses);
+
+                  
+        // Verificar la estructura de las respuestas
+        console.log(responses, "PRODUCTOS RECIBIDOS DESDE LA API");
+
+        // Filtrar cualquier respuesta que no tenga el formato esperado
+        const validProducts = responses.filter(product => product && product._id);
+          setFavoriteProducts(validProducts);
         } catch (error) {
           console.error('Error al obtener productos favoritos:', error);
         }
@@ -44,6 +54,10 @@ export const MyFavorites = () => {
       <FavoritesDiv>
         {favoriteProducts && favoriteProducts.length > 0 ? (
           favoriteProducts.map((product) => {
+            if (!product || !product._id) {
+              console.error("Producto no válido:", product);
+              return null; // Evita renderizar productos inválidos
+            }
             return (
               <Card
                 key={product._id} 
