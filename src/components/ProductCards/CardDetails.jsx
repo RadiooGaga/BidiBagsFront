@@ -9,7 +9,7 @@ const { GalleryImgDiv, ProductCardGalleryPic, ContentProduct, Intro, TextContent
     Details,Paragraph } = StyledCards;
 
 
-export const CardDetails = ({ product, isFavorite, onFavoriteClick, onAddToCart }) => {
+export const CardDetails = ({ product, isFavorite, heartClicked, onAddToCart }) => {
 
   const { user } = useAuth();
 
@@ -30,10 +30,11 @@ export const CardDetails = ({ product, isFavorite, onFavoriteClick, onAddToCart 
             <ProductCardH3>€{product.price}</ProductCardH3>
             <SpanContent>{product.inStock ? 'En stock' : 'Sin stock'}</SpanContent>
            
-            <Button type="button" backgroundColor="transparent" onClick={onFavoriteClick}>
+            <Button type="button" backgroundColor="transparent" >
               <Heart
-                src={isFavorite ? '/assets/icons/heart.png' : '/assets/icons/emptyHeart.png'}
+                src={ isFavorite ? '/assets/icons/heart.png' : '/assets/icons/emptyHeart.png'}
                 alt="add to favorites"
+                onClick={heartClicked}
               />
             </Button>
           </Intro>

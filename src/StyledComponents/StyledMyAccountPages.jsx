@@ -88,4 +88,10 @@ const FormSection = styled.section `
     gap: var(--gap-s);
 `
 
-export default { SectionMyAccount, DowloadCsvDiv, AccountDiv, AccountNavDiv, AccountNavUl, StyledLabel, FormSection }
+const Titles = styled.span ` 
+    align-self: center;
+    font-family: var(--font-walkway); 
+    font-size: var(--font-size-m);
+`
+
+export default { SectionMyAccount, DowloadCsvDiv, AccountDiv, AccountNavDiv, AccountNavUl, StyledLabel, FormSection, Titles }

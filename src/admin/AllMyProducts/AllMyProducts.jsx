@@ -2,16 +2,17 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../components/Button/Button'
 import { useApi } from '../../utils/useApi';
+import { useApiProvider } from '../../utils/ApiContext';
 import { Card } from '../../components/ProductCards/Card';
 import StyledMyAccountPages from '../../StyledComponents/StyledMyAccountPages';
-const { DowloadCsvDiv } = StyledMyAccountPages;
+const { DowloadCsvDiv, Titles } = StyledMyAccountPages;
 
 
-const apiUrl = import.meta.env.VITE_API_URL;
 
 export const AllMyProducts = () => {
   
   const navigate = useNavigate();
+  const { apiUrl } = useApiProvider();
     const { products, loading, error } = useApi({
       endpoint:`/products`, 
       url:'',
@@ -55,6 +56,7 @@ export const AllMyProducts = () => {
     return (
       <>
       <DowloadCsvDiv>
+        <Titles>TODOS MIS PRODUCTOS</Titles>
       <Button 
         type="button"
         text="Descargar csv"

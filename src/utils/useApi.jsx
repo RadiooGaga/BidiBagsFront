@@ -1,17 +1,22 @@
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useContext } from 'react';
 import { INITIAL_STATE, reducer } from './useReducer';
+import { useAuth } from './AuthContext';
+import { useApiProvider } from './ApiContext';
 
 export const useApi = ({ endpoint, url }) => {
+    const { user } = useAuth();
+    const { apiUrl } = useApiProvider();
+    //const urlApi = import.meta.env.VITE_API_URL;
     const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
     useEffect(() => {
-        const urlApi = import.meta.env.VITE_API_URL;
-        const urlFetch = url || `${urlApi}${endpoint}`;
+      
+        const urlFetch = url || `${apiUrl}${endpoint}`;
         
         // Crea un cacheKey único para cada búsqueda (elimina las barras iniciales y finales)
         const cacheKey = endpoint.replace(/^\/+|\/+$/g, ''); 
         // Comprueba si el caché ya contiene datos para esta clave
-        const cachedData = JSON.parse(localStorage.getItem(cacheKey)); 
+        const cachedData = user && user.rol !== 'admin' ? JSON.parse(localStorage.getItem(cacheKey)) : null;
 
         if (cachedData) {
             // Si encontramos los datos en el caché, los usamos en el payload
@@ -27,7 +32,7 @@ export const useApi = ({ endpoint, url }) => {
         fetch(urlFetch)
             .then((res) => res.json())
             .then((data) => {
-                // Formateamos los datos según el tipo de búsqueda (tomando el tipo de endpoint)
+                // Formateamos los datos según el tipo de búsqueda (según el tipo de endpoint)
                 const getTypeofData = endpoint.split('/')[1];
                 const formattedData = {
                     products: getTypeofData === 'products' ? data : [],
@@ -41,7 +46,7 @@ export const useApi = ({ endpoint, url }) => {
                 };
 
                 // Guardamos los datos en caché en localStorage
-                //localStorage.setItem(cacheKey, JSON.stringify(formattedData)); 
+                localStorage.setItem(cacheKey, JSON.stringify(formattedData)); 
 
                 // Despachamos los datos al estado
                 dispatch({
@@ -53,7 +58,7 @@ export const useApi = ({ endpoint, url }) => {
                 console.error("Error al obtener los datos:", err);
                 dispatch({ type: 'FETCH_FAILURE', payload: err });
             });
-    }, [endpoint, url]); 
+    }, [endpoint, apiUrl, url]); 
 
     return { ...state };
 };

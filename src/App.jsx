@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import { AuthProvider } from './utils/AuthContext';
+import { ApiProvider } from './utils/ApiContext';
 import './App.css'
 
 import { Header } from './components/Header/Header';
@@ -61,6 +62,7 @@ export const App = () => {
 
   return (
     <>
+    <ApiProvider>
     <AuthProvider>
        <div className={`App ${transition ? 'page-enter-active' : 'page-exit-active'}`}>
       <Header />
@@ -110,6 +112,7 @@ export const App = () => {
       <Footer />
       </div>
       </AuthProvider>
+      </ApiProvider>
     </>
   )
 }

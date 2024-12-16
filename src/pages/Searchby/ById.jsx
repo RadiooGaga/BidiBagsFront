@@ -9,7 +9,7 @@ export const ById = () => {
 
   const { id } = useParams();
   const { user, toggleFavorite } = useAuth();
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [ isFavorite, setIsFavorite] = useState(true);
   const navigate = useNavigate();
 
   const { products, loading, error } = useApi({
@@ -24,16 +24,21 @@ export const ById = () => {
     }
   }, [user, products]);
 
-  const handleFavoriteClick = () => {
+  const handleFavoriteClick = async () => {
     
     if (products) {
-        toggleFavorite(products);
+        await toggleFavorite(products);
         setIsFavorite((prevState) => !prevState);  // Cambiar el estado de favoritos
         navigate('/account/favorites'); // Navegar a la página de favoritos
       } else {
         console.error("Producto no definido al intentar agregar/eliminar de favoritos");
       }
   };
+
+  const handleFavoriteToggle = async (product) => {
+    await toggleFavorite(product); // Actualiza backend y contexto
+  };
+  
 
   const handleAddToCart = () => {
     console.log('Producto añadido al carrito:', products);
@@ -46,8 +51,9 @@ export const ById = () => {
   return (
     <CardDetails
       product={products}
-      isFavorite={isFavorite}
-      onFavoriteClick={handleFavoriteClick}
+      heartClicked={handleFavoriteClick}
+      isFavorite={user.favorites.includes(products._id)} // Vincula con el estado del usuario
+      onFavoriteClick={() => handleFavoriteToggle(products)} // Alternar favorito
       onAddToCart={handleAddToCart}
     />
   );

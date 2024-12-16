@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useApiProvider } from '../../utils/ApiContext';
 import { FormComponent } from '../../components/FormComponent/FormComponent';
 
-const apiUrl = import.meta.env.VITE_API_URL;
 
 export const CreateProduct = () => {
+  const { apiUrl } = useApiProvider();
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const fields = [
-    { name: 'categoryName', label: 'Categoría', type: 'text', required: true },
-    { name: 'collectionName', label: 'Colección', type: 'text', required: true },
+    { name: 'categoryName', label: 'Categoría', placeholder: 'categoría a la que pertenece', type: 'text', required: true },
+    { name: 'collectionName', label: 'Colección', placeholder: 'nombre de la colección', type: 'text', required: true },
     { name: 'img', label: 'Imagen', type: 'file', required: true },
     { name: 'price', label: 'Precio', type: 'number', required: true },
     { name: 'inStock', label: 'En Stock', type: 'checkbox', className: 'customCheckbox' },

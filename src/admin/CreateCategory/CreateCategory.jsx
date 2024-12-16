@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useApiProvider } from '../../utils/ApiContext';
 import { FormComponent } from '../../components/FormComponent/FormComponent';
 
-const apiUrl = import.meta.env.VITE_API_URL;
 
 export const CreateCategory = () => {
+  const { apiUrl } = useApiProvider();
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
   const fields = [
@@ -38,24 +40,41 @@ export const CreateCategory = () => {
         })
         .then((data) => {
           if (data.success) {
-            console.log(data, "categoría creada!")
-            navigate('/categories'); 
+            setSuccessMessage('¡Categoría creada!');
+            setTimeout(() => {
+                setSuccessMessage('');
+                navigate('/admin-account/categories'); 
+            }, 1500);
           } else {
             setErrorMessage(data.message || 'Hubo un error al subir la categoría');
-            setTimeout(() => setErrorMessage(''), 2000);
+            setTimeout(() => setErrorMessage(''), 1500);
           }
         })
         .catch((error) => {
           console.error('Error al subir la categoría:', error);
           setErrorMessage(error.message || 'Error desconocido. Intenta de nuevo.');
-          setTimeout(() => setErrorMessage(''), 2000);
+          setTimeout(() => setErrorMessage(''), 1500);
         });
   };
 
   return (
     <>
       <FormComponent fields={fields} text="SUBIR CATEGORÍA" onSubmit={handleCreateCategory} />
-      {errorMessage && <p>{errorMessage}</p>}
+      {errorMessage && (
+      <div>
+        <p style={{ color: 'var(--color-error)', marginTop: '10px' }}>
+        {errorMessage}
+        </p> 
+      </div>
+    )}
+    
+    {successMessage && (
+      <div>
+      <p style={{ color: 'var(--color-success)', marginTop: '10px' }}>
+        {successMessage}
+      </p>
+      </div>
+    )}
       </>
   );
 };

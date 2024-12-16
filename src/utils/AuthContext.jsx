@@ -1,16 +1,16 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-
 const AuthContext = createContext();
 
 const apiUrl = import.meta.env.VITE_API_URL;
+
 
 export const useAuth = () => {
   return useContext(AuthContext);
 };
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); // Establecer el estado del usuario
-  const [token, setToken] = useState(null);
+  const [ user, setUser ] = useState(null); 
+  const [ token, setToken ] = useState(null);
 
   useEffect(() => {
     // Cargar los datos del usuario y token desde localStorage (si existen)
@@ -22,16 +22,19 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  // Método para iniciar sesión
+
+
+   // MÉTODO PARA INICIAR SESIÓN
   const login = (userData, authToken) => {
-    console.log('Usuario recibido al iniciar sesión:',/* userData*/); 
+    //console.log('Usuario recibido al iniciar sesión:',  userData); 
     setUser(userData);
     setToken(authToken);
     localStorage.setItem('user', JSON.stringify(userData));
     localStorage.setItem('token', authToken);
   };
 
-   // Método para cerrar sesión
+
+   // MÉTODO PARA CERRAR SESIÓN
    const logout = () => {
     setUser(null);
     setToken(null);
@@ -41,10 +44,13 @@ export const AuthProvider = ({ children }) => {
 
 
 
+  // MÉTODO ACTUALIZAR USUARIO
   const updateUser = async (newUserData) => {
+    if (!user || !user._id || !token) {
+      throw new Error("Usuario o token no están disponibles.");
+    }
+
     try {
-      
-      console.log('datos enviados al backend:', newUserData)
 
       const response = await fetch(`${apiUrl}/update-user/${user._id}`, {
         method: 'PUT', 
@@ -59,11 +65,15 @@ export const AuthProvider = ({ children }) => {
         throw new Error('Error al actualizar el usuario en la base de datos.');
       }
       const data = await response.json();
+      if (!data || !data.user) {
+        throw new Error('Respuesta inesperada del servidor.');
+      }
+  
   
       // Actualizar el estado local del usuario y reemplazar con la respuesta del backend
       setUser(data.user); 
       localStorage.setItem('user', JSON.stringify(data.user));
-      console.log('Usuario actualizado en la base de datos y en el estado local.');
+      //console.log('Usuario actualizado en la base de datos y en el estado local.');
       return data.user;
 
     } catch (error) {
@@ -74,39 +84,38 @@ export const AuthProvider = ({ children }) => {
   
 
 
-  // Método para añadir o eliminar productos de favoritos
+  // MÉTODO AÑADIR/ELIMINAR DE FAVORITOS
   const toggleFavorite = async (product) => {
-    console.log(product, "EL PRODUCTO QUE SE ALMACENA EN CÓDIGO TOGGLE");
-  
+
     if (!user || !user.favorites) {
       console.error("El usuario no está autenticado o no tiene favoritos inicializados.");
       return;
     }
   
     const productId = product._id;
-    if (!productId) {
-      console.error("Producto inválido proporcionado a toggleFavorite:", productId);
-      return;
-    }
+      if (!productId) {
+        console.error("Producto inválido proporcionado a toggleFavorite:", product);
+        return;
+      }
   
-    // Verificar si el producto ya está en los favoritos
-    const isFavorite = user.favorites.some(item => item.toString() === productId.toString());
+    const isFavorite = user.favorites.includes(productId);
   
-    let updatedFavorites;
-    if (isFavorite) {
-      // Si ya está, lo eliminamos
-      updatedFavorites = user.favorites.filter(item => item.toString() !== productId.toString());
-    } else {
-      // Si no está, lo agregamos
-      updatedFavorites = [...user.favorites, productId]; // Solo agregamos el ID del producto
-    }
+    // Crear el nuevo array de favoritos
+    const updatedFavorites = isFavorite
+      ? user.favorites.filter((id) => id !== productId) // se elimina si ya es favorito
+      : [...user.favorites, productId]; // se agrega si no lo es
   
-    // Actualizar los favoritos del usuario en el backend
     try {
-      await updateUser({ favorites: updatedFavorites }); 
-      console.log("USUARIO ACTUALIZADO!");
+      // se actualiza el backend
+      const updatedUser = await updateUser({ favorites: updatedFavorites });
+
+      // Actualizar el estado local del usuario en el contexto
+      setUser(updatedUser); 
+  
+      //console.log("Favoritos actualizados:", updatedFavorites);
     } catch (error) {
-      console.error("Error al actualizar los favoritos:", error);
+      console.error("Error al actualizar favoritos en el backend:", error);
+      alert("Hubo un problema al actualizar tus favoritos. Por favor, inténtalo de nuevo.");
     }
   };
 

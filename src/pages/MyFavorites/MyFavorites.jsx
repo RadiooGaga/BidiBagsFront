@@ -1,71 +1,59 @@
 import React,{ useState, useEffect } from 'react';
 import { Card } from '../../components/ProductCards/Card';
+import { useApiProvider } from '../../utils/ApiContext';
 import { useAuth } from '../../utils/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import StyledUserAccount from '../../StyledComponents/StyledUserAccount';
-const { FavoritesDiv, MisFavoritos } = StyledUserAccount;
+const { FavoritesDiv, Titles } = StyledUserAccount;
 
-const apiUrl = import.meta.env.VITE_API_URL;
+
 
 export const MyFavorites = () => {
+
+  const { apiUrl } = useApiProvider();
   const navigate = useNavigate();
   const { user } = useAuth();
   const [favoriteProducts, setFavoriteProducts] = useState([]);
 
-  useEffect(() => {
-    console.log(favoriteProducts, "ESTADO DE FAVORITOS");
-  }, [favoriteProducts]);
-
-  useEffect(() => {
-    const fetchFavorites = async () => {
-      if (user && user.favorites && user.favorites.length > 0) {
-        try {
-          // Consultar todos los productos favoritos por sus IDs
-          const responses = await Promise.all(
-            user.favorites.map((id) =>
-              fetch(`${apiUrl}/products/${id}`).then((res) => res.json())
-            )
-          );
-
-                  
-        // Verificar la estructura de las respuestas
-        console.log(responses, "PRODUCTOS RECIBIDOS DESDE LA API");
-
-        // Filtrar cualquier respuesta que no tenga el formato esperado
-        const validProducts = responses.filter(product => product && product._id);
-          setFavoriteProducts(validProducts);
-        } catch (error) {
-          console.error('Error al obtener productos favoritos:', error);
-        }
+  
+  // Sincronizar la lista de productos favoritos
+  const fetchFavorites = async () => {
+    if (user && user.favorites.length > 0) {
+      try {
+        const responses = await Promise.all(
+          user.favorites.map((id) =>
+            fetch(`${apiUrl}/products/${id}`).then((res) => res.json())
+          )
+        );
+        const validProducts = responses.filter((product) => product && product._id);
+        setFavoriteProducts(validProducts);
+      } catch (error) {
+        console.error("Error al obtener productos favoritos:", error);
       }
-    };
-
-    fetchFavorites();
-  }, [user]);
-
-
-  const handleClickOnFavorite = (id) => {
-    navigate(`/products/${id}`);
+    } else {
+      setFavoriteProducts([]); // Si no hay favoritos, limpiar la lista
+    }
   };
+
+  // Cargar los nuevos favoritos cada vez que cambien
+  useEffect(() => {
+    fetchFavorites();
+  }, [user.favorites]);
+
+ 
 
   return (
     <>
-      <MisFavoritos>MIS FAVORITOS</MisFavoritos>
+      <Titles>MIS FAVORITOS</Titles>
       <FavoritesDiv>
-        {favoriteProducts && favoriteProducts.length > 0 ? (
-          favoriteProducts.map((product) => {
-            if (!product || !product._id) {
-              console.error("Producto no válido:", product);
-              return null; // Evita renderizar productos inválidos
-            }
-            return (
-              <Card
-                key={product._id} 
-                product={product} 
-                onClick={() => handleClickOnFavorite(product._id)} 
-              />
-            );
-          })
+        {favoriteProducts.length > 0 ? (
+          favoriteProducts.map((product) => (
+            <Card
+              key={product._id}
+              product={product}
+              onClick={() => navigate(`/products/${product._id}`)} // Navegar al producto
+            />
+          ))
         ) : (
           <span>No tienes productos en tus favoritos.</span>
         )}

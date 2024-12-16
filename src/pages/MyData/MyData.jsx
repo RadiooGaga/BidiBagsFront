@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useApiProvider } from '../../utils/ApiContext';
 //import { FormComponent } from '../../components/FormComponent/FormComponent'
 import { Button } from '../../components/Button/Button';
 import { useAuth } from '../../utils/AuthContext';
 import StyledUserAccount from '../../StyledComponents/StyledUserAccount';
 const { DataDiv, SomeSpace } = StyledUserAccount;
 
-const apiUrl = import.meta.env.VITE_API_URL;
+
 
 export const MyData = () => {
 
   const navigate = useNavigate();
- 
+  const { apiUrl } = useApiProvider();
   const { user, token } = useAuth();
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(false);

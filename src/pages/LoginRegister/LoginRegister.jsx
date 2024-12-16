@@ -3,14 +3,15 @@ import { Button } from '../../components/Button/Button';
 import { FormComponent } from '../../components/FormComponent/FormComponent';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../utils/AuthContext';
+import { useApiProvider } from '../../utils/ApiContext';
 import StyledLoginRegister from '../../StyledComponents/StyledLoginRegister';
 const { SectionLoginRegister, AccountAlreadyDiv,AccountAlreadyP, ErrorMessageDiv } = StyledLoginRegister
 
 
-const apiUrl = import.meta.env.VITE_API_URL;
 
 export const LoginRegister = () => {
 
+    const { apiUrl } = useApiProvider();
     const [ errorMessage, setErrorMessage ] = useState('')
     const { user, login } = useAuth(); 
     const navigate = useNavigate();

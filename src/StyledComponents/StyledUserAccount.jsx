@@ -33,7 +33,8 @@ const FavoritesDiv = styled.div `
     gap: var(--gap-xl)
 `
 
-const MisFavoritos = styled.span ` 
+const Titles = styled.span ` 
+    align-self: center;
     font-family: var(--font-walkway); 
     font-size: var(--font-size-m);
 `
@@ -76,7 +77,7 @@ export default {
     DataDiv, 
     SomeSpace,
     FavoritesDiv, 
-    MisFavoritos, 
+    Titles, 
     UserAccountDiv, 
     SessionDiv, 
     ByeMessage }

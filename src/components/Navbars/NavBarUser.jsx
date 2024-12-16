@@ -13,7 +13,7 @@ export const UserNavBar= () => {
 
 
   // Navegación condicional para el icono de usuario según el rol
-  const accountLink = userRol === 'admin' ? '/admin-account' : '/account';
+  const accountLink = userRol === 'user' ? '/account/favorites' : '/admin-account/products';
   const shoppingCartLink = userRol === 'user' ? '/account/shopping-cart' : '/admin-account';
 
   const navItems = [

@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
+import { useApiProvider } from '../../utils/ApiContext';
 import { FormComponent } from '../../components/FormComponent/FormComponent';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../utils/AuthContext';
 import StyledLoginRegister from '../../StyledComponents/StyledLoginRegister';
 const { SectionLoginRegister, ErrorMessageDiv } = StyledLoginRegister
 
-const apiUrl = import.meta.env.VITE_API_URL;
-
-
 
 export const Login = () => {
 
+    const { apiUrl } = useApiProvider();
     const navigate = useNavigate()
     const { login } = useAuth();
     const [ errorMessage, setErrorMessage ] = useState('');
@@ -82,9 +81,9 @@ export const Login = () => {
           login(data.user, data.token);
   
           if (data.user.rol === 'admin') {
-            navigate('/admin-account');
+            navigate('/admin-account/products');
           } else {
-            navigate('/account');
+            navigate('/account/favorites');
           }
         } else {
           setErrorMessage(data?.message || 'Hubo un error desconocido.');

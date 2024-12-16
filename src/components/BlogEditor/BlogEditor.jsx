@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useApiProvider } from '../../utils/ApiContext';
 import { FormComponent } from '../../components/FormComponent/FormComponent';
 import './BlogEditor.css'
 
-const apiUrl = import.meta.env.VITE_API_URL;
 
 export const BlogEditor = () => {
 
+  const { apiUrl } = useApiProvider();
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 

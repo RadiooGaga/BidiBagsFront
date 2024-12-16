@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../utils/AuthContext';
+import { useApiProvider } from '../../utils/ApiContext';
 import { Button } from '../../components/Button/Button';
 import { FormUpdateUser } from '../../components/FormUpdateUser/FormUpdateUser';
 import StyledUserAccount from '../../StyledComponents/StyledUserAccount';
 const { UserAccountDiv, SessionDiv, ByeMessage } = StyledUserAccount;
 
-const apiUrl = import.meta.env.VITE_API_URL;
+
 
 export const Session = () => {
 
+  const { apiUrl } = useApiProvider();
   const { user, token, updateUser, logout } = useAuth(); 
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
