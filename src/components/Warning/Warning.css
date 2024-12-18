@@ -1,0 +1,28 @@
+.warningDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%; 
+    height: 300px; 
+    background-color: var(--color-almostWhite);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+    padding: 20px; 
+    z-index: 1;
+}
+
+.warningText {
+    font-size: var(--font-size-ms);
+    color: var(--color-text);
+}
+
+.yesOrNo {
+    display: flex;
+    margin-top: var(--margin-m);
+    gap: var(--gap-l);
+}

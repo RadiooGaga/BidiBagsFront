@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useContext } from 'react';
+import { useEffect, useReducer } from 'react';
 import { INITIAL_STATE, reducer } from './useReducer';
 import { useAuth } from './AuthContext';
 import { useApiProvider } from './ApiContext';
@@ -6,7 +6,6 @@ import { useApiProvider } from './ApiContext';
 export const useApi = ({ endpoint, url }) => {
     const { user } = useAuth();
     const { apiUrl } = useApiProvider();
-    //const urlApi = import.meta.env.VITE_API_URL;
     const [state, dispatch] = useReducer(reducer, INITIAL_STATE);
 
     useEffect(() => {

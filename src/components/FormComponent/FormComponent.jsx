@@ -3,19 +3,23 @@ import './FormComponent.css';
 import { Button } from '../Button/Button';
 
 
-export const FormComponent = React.memo(({ className, fields, text, onSubmit }) => {
- /* const [formData, setFormData] = useState(
-    fields.reduce((acc, field) => ({ ...acc, [field.name]: field.type === 'checkbox' ? false : '' }), {})
-  );*/
+export const FormComponent = React.memo(({ className, fields, text, onSubmit, initialData = {}  }) => {
+
   const [formData, setFormData] = useState(
-    (Array.isArray(fields) && fields.length > 0) 
-      ? fields.reduce((acc, field) => ({ 
-          ...acc, 
-          [field.name]: field.type === 'checkbox' ? false : '' 
-        }), {}) 
+    //validar si fields es un array y contiene elementos. Si no, establece objeto vacío.
+    (Array.isArray(fields) && fields.length > 0)
+      ? fields.reduce((acc, field) => ({
+          ...acc,
+          //Comprueba si initialData existe y si el valor correspondiente a field.name no es undefined.
+          [field.name]: initialData && initialData[field.name] !== undefined
+            ? initialData[field.name]  // Si hay datos iniciales, se usa
+            : (field.type === 'checkbox' ? false : ''), // Si no, usa el valor por defecto.
+            //false para tipo chekbox y '' para los demás.
+        }), {})
       : {}
-  ); 
-  const [imgPreview, setImgPreview] = useState(null);
+  );
+
+  const [imgPreview, setImgPreview] = useState(initialData.img || null);
 
 
   const handleChange = (e) => {
@@ -76,7 +80,9 @@ export const FormComponent = React.memo(({ className, fields, text, onSubmit }) 
         fieldContent = (
           <>
             <label htmlFor={name}>{label}</label>
-            <textarea {...commonProps} />
+            <textarea 
+            value={formData[name] || ''} 
+            {...commonProps} />
           </>
         );
         break;
@@ -120,9 +126,9 @@ export const FormComponent = React.memo(({ className, fields, text, onSubmit }) 
     <form onSubmit={handleSubmit} className={className || 'default-form-class'}>
       {fields.map(renderField)} {/* Renderizar cada campo */}
       {imgPreview && (
-        <div className="imagePreview">
+        <div id="imagePreview">
           <p>Vista previa de la imagen:</p>
-          <img src={imgPreview} alt="Vista previa" style={{ maxWidth: '100%', height: 'auto' }} />
+          <img src={imgPreview} alt="Vista previa" />
         </div>
       )}
       <Button

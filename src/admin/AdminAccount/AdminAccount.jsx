@@ -18,7 +18,7 @@ export const AdminAccount = () => {
 
   return (
     <SectionMyAccount>
-      <NavBarAdminAccount />
+      <NavBarAdminAccount/>
         <AccountDiv>
         <Outlet/>
         </AccountDiv>  

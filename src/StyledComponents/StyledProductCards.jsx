@@ -107,8 +107,6 @@ const TextContent = styled.div `
     align-items: center;
     width: 100%;
     justify-content: space-evenly;
-
- 
 `
 
 const ProductCardH2 = styled.h2 `

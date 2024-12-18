@@ -5,7 +5,6 @@ const { AccountNavDiv, AccountNavUl, StyledLabel } = StyledMyAccountPages;
 
 
 export const NavBarAdminAccount = () => {
-  
 
   const navItems = [
     { to: "products", label: "TODOS MIS PRODUCTOS", alt: "allMyProducts" },

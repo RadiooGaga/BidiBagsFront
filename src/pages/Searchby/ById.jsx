@@ -52,7 +52,7 @@ export const ById = () => {
     <CardDetails
       product={products}
       heartClicked={handleFavoriteClick}
-      isFavorite={user.favorites.includes(products._id)} // Vincula con el estado del usuario
+      isFavorite={user && user.favorites ? user.favorites.includes(products._id) : false} // Vincula con el estado del usuario
       onFavoriteClick={() => handleFavoriteToggle(products)} // Alternar favorito
       onAddToCart={handleAddToCart}
     />

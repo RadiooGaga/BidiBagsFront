@@ -1,5 +1,6 @@
 import React from 'react'
 import { useAuth } from '../../utils/AuthContext';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from '../Button/Button'
 import StyledProductPages from '../../StyledComponents/StyledProductPages';
 const { ProductsContainer, ProductCardDetailed } = StyledProductPages; 
@@ -9,9 +10,15 @@ const { GalleryImgDiv, ProductCardGalleryPic, ContentProduct, Intro, TextContent
     Details,Paragraph } = StyledCards;
 
 
-export const CardDetails = ({ product, isFavorite, heartClicked, onAddToCart }) => {
+export const CardDetails = ({ product, isFavorite, heartClicked, onSubmit, onAddToCart }) => {
 
   const { user } = useAuth();
+  const productId = product._id
+  const navigate = useNavigate()
+  
+  const handleUpdate = () => {
+    navigate(`/admin-account/update-product/${productId}`)
+  }
 
   return (
     <ProductsContainer>
@@ -66,7 +73,7 @@ export const CardDetails = ({ product, isFavorite, heartClicked, onAddToCart }) 
                   backgroundColor="var(--color-aubergine)"
                   hoverBackgroundColor="var(--color-barbiePink)"
                   tapBackgroundColor="var(--color-pushTheButton)"
-                  //onClick={onUpdateProduct}
+                  onClick={handleUpdate}
                   />  
                    <Button
                   type="button"

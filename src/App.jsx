@@ -22,6 +22,8 @@ import { AllMyProducts } from './admin/AllMyProducts/AllMyProducts';
 import { AllMyCategories } from './admin/AllMyCategories/AllMyCategories';
 import { CreateCategory } from './admin/CreateCategory/CreateCategory';
 import { CreateProduct } from './admin/CreateProduct/CreateProduct';
+import { UpdateProduct } from './admin/Update/UpdateProduct';
+import { UpdateCategory } from './admin/Update/UpdateCategory';
 import { Stock } from './admin/Stock/Stock';
 import { BlogEditor } from './components/BlogEditor/BlogEditor';
 
@@ -97,6 +99,8 @@ export const App = () => {
               <Route path="categories" element={<AllMyCategories />} />
               <Route path="create-category" element={<CreateCategory />} />
               <Route path="create-product" element={<CreateProduct />} />
+              <Route path="update-product/:id" element={<UpdateProduct />} />
+              <Route path="update-category/:id" element={<UpdateCategory />} />
               <Route path="stock" element={<Stock />} />
               <Route path="create-post" element={<BlogEditor />} />
               <Route path="session" element={<Session />} />

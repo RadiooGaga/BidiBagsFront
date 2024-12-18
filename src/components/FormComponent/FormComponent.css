@@ -50,12 +50,19 @@ input {
     cursor: pointer;
 }
 
-.imagePreview {
+#imagePreview {
+    display: flex;
+    flex-direction: column;
     width: 200px;
-    height: 200px;
+    height: auto;
     font-family: var(--font-walkway);
     font-size: var(--font-size-xs);
     margin-bottom: var(--margin-l);
+}
+
+.imagePreview img {
+    width: 100%;
+    object-fit: cover;
 }
 
 
