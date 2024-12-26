@@ -2,11 +2,7 @@ import React from 'react'
 import { Button } from '../Button/Button'
 import './Warning.css'
 
-export const Warning = ({ text, /*deleteItem, itemToDelete*/ }) => {
-
-    const goBack = () => {
-        window.history.back();
-      };
+export const Warning = ({ text, onClick, onClose }) => {
 
   return (
     <>
@@ -22,10 +18,8 @@ export const Warning = ({ text, /*deleteItem, itemToDelete*/ }) => {
                 backgroundColor="var(--color-aubergine)"
                 hoverBackgroundColor="var(--color-barbiePink)"
                 tapBackgroundColor="var(--color-pushTheButton)"
-                onClick={() => alert("ESTOY TRABAJANDO EN ELLO, MI CIELA")}
-                >
-       
-            </Button>
+                onClick={onClick}
+            />
             <Button
                 type="button"
                 text="NO"
@@ -35,7 +29,7 @@ export const Warning = ({ text, /*deleteItem, itemToDelete*/ }) => {
                 backgroundColor="var(--color-aubergine)"
                 hoverBackgroundColor="var(--color-barbiePink)"
                 tapBackgroundColor="var(--color-pushTheButton)"
-                onClick={goBack}
+                onClick={onClose}
                 >
             </Button>
             </div>

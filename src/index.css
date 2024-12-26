@@ -20,13 +20,17 @@
   --font-sansation: 'sansation';
   --font-walkway: 'walkway';
 
+  /*neutros*/
   --color-white: white;
   --color-almostWhite: #eef1f1;
   --color-almostBlack: #222225;
   --color-supersoft-grey: #EEEEEE;
   --color-headerandfooter: rgba(241, 243, 244, 0.509);
   --color-text: #3a4042;
+  --color-line: #ced5d7;
   --color-pushTheButton: #4b4b52;
+
+  /*color*/
   --color-barbiePink: #D5748B;
   --color-aubergine: #762c3f;
   --color-success: rgb(87, 115, 87);

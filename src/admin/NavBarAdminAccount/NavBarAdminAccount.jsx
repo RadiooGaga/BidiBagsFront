@@ -13,7 +13,7 @@ export const NavBarAdminAccount = () => {
     { to: "create-product", label: "CREAR PRODUCTO", alt: "createProduct" },
     { to: "stock", label: "INVENTARIO", alt: "stock" },
     { to: 'create-post', label: 'ENTRADA EN BLOG', alt: 'createPost'},
-    { to: "session", label: "MI CUENTA", alt: "session" }
+    { to: "signout", label: "MI CUENTA", alt: "signout" }
     
   ];
 

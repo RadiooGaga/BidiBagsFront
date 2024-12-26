@@ -14,7 +14,7 @@ export const NavBarAccount = () => {
     { to: "favorites", label: "MIS FAVORITOS", alt: "myFavorites"},
     { to: "order-status", label: "ESTADO DEL PEDIDO", alt: "myOrderStatus"},
     { to: "changes-and-returns", label: "CAMBIOS / DEVOLUCIONES", alt: "myChanges"},
-    { to: "session", label: "MI CUENTA", alt: "session" },
+    { to: "signout", label: "MI CUENTA", alt: "signout" },
   ];
 
   return (

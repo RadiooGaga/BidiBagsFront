@@ -130,7 +130,7 @@ const SpanContent = styled.span `
     width: 100%;
     height: auto;
     padding: var(--padding-xl) var(--padding-l);
-    border-bottom: 1px solid var(--color-text);
+    border-bottom: 1px solid var(--color-line);
 
      @media screen and (max-width: 769px) {
         padding: var(--padding-s) var(--padding-s) var(--padding-l) var(--padding-s);
@@ -157,7 +157,7 @@ const Details = styled.div  `
     width: 100%;
     height: auto;
     padding: var(--padding-xl);
-    border-bottom: 1px solid var(--color-text);
+    border-bottom: 1px solid var(--color-line);
 
    @media screen and (max-width: 769px) {
         padding: var(--padding-s);

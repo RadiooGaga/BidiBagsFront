@@ -32,7 +32,7 @@ import { MyData } from './pages/MyData/MyData';
 import { MyFavorites } from './pages/MyFavorites/MyFavorites';
 import { MyOrderStatus } from './pages/MyOrderStatus/MyOrderStatus';
 import { MyChanges } from './pages/MyChanges/MyChanges';
-import { Session } from './pages/Session/Session';
+import { SignOut } from './pages/SignOut/SignOut';
 import { ShoppingCart } from './pages/ShoppingCart/ShoppingCart';
 
 import { Shipping } from './pages/FooterPages/Shipping';
@@ -87,7 +87,7 @@ export const App = () => {
             <Route path="favorites" element={<MyFavorites />} />
             <Route path="order-status" element={<MyOrderStatus />} />
             <Route path="changes-and-returns" element={<MyChanges />} />
-            <Route path="session" element={<Session />} />
+            <Route path="signout" element={<SignOut />} />
           </Route>
 
           <Route path="/admin-account" element={
@@ -103,7 +103,7 @@ export const App = () => {
               <Route path="update-category/:id" element={<UpdateCategory />} />
               <Route path="stock" element={<Stock />} />
               <Route path="create-post" element={<BlogEditor />} />
-              <Route path="session" element={<Session />} />
+              <Route path="signout" element={<SignOut />} />
           </Route>
           
 

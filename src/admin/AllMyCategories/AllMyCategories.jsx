@@ -14,12 +14,55 @@ export const AllMyCategories = () => {
 
   const { apiUrl } = useApiProvider();
   const navigate = useNavigate()
+  const [ errorMessage, setErrorMessage ] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [showWarning, setShowWarning] = useState(false); 
+  const [categoryToDelete, setCategoryToDelete] = useState(null);
   
-  const { categories, loading, error } = useApi({
-    endpoint: `/categories`,
-    url: '',
-  });
+  const { categories, loading, error } = useApi({ endpoint: `/categories`, url: '' });
+
+  const handleOpenWarning = (id) => {
+    setCategoryToDelete(id);
+    setShowWarning(true);
+  };
+
+  const handleCloseWarning = () => {
+    setShowWarning(false);
+  };
+
+  //BORRAR CATEGORÍA
+  const handleDeleteItem = () => {
+
+    if (!categoryToDelete) return;
+
+    fetch(`${apiUrl}/delete-category/${categoryToDelete}`, {
+      method: 'DELETE',
+    })
+    .then((res) => {
+      if (!res.ok) {
+        if (res.status === 404) setErrorMessage('404: Error al eliminar la categoría');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      if (data.success) {
+        setSuccessMessage('Categoría eliminada!');
+        setShowWarning(false);
+        setCategoryToDelete(null);
+        setTimeout(() => {
+          navigate('/admin-account/categories');
+        }, 1500); 
+      } else {
+        setErrorMessage(data.message || 'Hubo un error al actualizar la categoría');
+        setTimeout(() => setErrorMessage(''), 2000);
+      }
+    })
+    .catch((error) => {
+      console.error('Error al actualizar la categoría:', error);
+      alert('Error al eliminar la categoría');
+    });
+  }
+
 
 
   //descargar csv
@@ -48,20 +91,15 @@ export const AllMyCategories = () => {
     }
   };
 
+  const handleUpdate = (id) => {
+    navigate(`/admin-account/update-category/${id}`)
+  }
+
   // determina si la categoría está visible para el usuario
   const getVisibilityText = (visible) => {
     return visible ? "visible" : "oculto";
   };
 
-  const handleUpdate = (id) => {
-    navigate(`/admin-account/update-category/${id}`)
-  }
-
-  const handleDelete = () => {
-    setShowWarning(true)
-  }
-
- 
   if (loading) return <p>Cargando categorías...</p>;
   if (error) { <Error text="Hubo un error al cargar las categorias. Por favor, inténtalo de nuevo." />}
 
@@ -70,6 +108,8 @@ export const AllMyCategories = () => {
      {showWarning && (
         <Warning 
           text="¿Eliminar esta categoría?"
+          onClose={handleCloseWarning}
+          onClick={handleDeleteItem}
         />
       )}
       <DowloadCsvDiv>
@@ -105,7 +145,7 @@ export const AllMyCategories = () => {
               text="eliminar" 
               colorText={"var(--color-aubergine)"} 
               backgroundColor={"transparent"}
-              onClick={() => handleDelete(category._id)} 
+              onClick={() => handleOpenWarning(category._id)} 
               />
               </Card>
                    
@@ -113,4 +153,6 @@ export const AllMyCategories = () => {
         )}
       </>
   );
-}
+} 
+
+

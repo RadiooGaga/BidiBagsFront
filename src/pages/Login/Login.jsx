@@ -32,72 +32,49 @@ export const Login = () => {
       // Datos que se envían
       const requestData = {
         email: formData.email,
-        password: formData.password
+        password: formData.password,
       };
-
-      // Solicitud POST a la API del registro
+    
       fetch(`${apiUrl}/login`, {
-        method: 'POST', 
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(requestData), 
+        body: JSON.stringify(requestData),
       })
-      .then(res => {
-        if (!res.ok) {
-          // Manejo de errores según el código de estado
-          switch (res.status) {
-            case 400:
-              setErrorMessage('Contraseña incorrecta');
-              break;
-            case 404:
-              setErrorMessage('El ususario no existe');
-              setTimeout(() => {
-                navigate('/register');
-              }, 1500);  
-              break;
-            case 500:
-              setErrorMessage('Error en el servidor');
-              break;
-            default:
-              setErrorMessage(`Error ${res.status}: ${res.statusText}`);
+        .then(async (res) => {
+          const data = await res.json(); 
+          if (!res.ok) {
+            throw new Error(data?.error || `Error ${res.status}: ${res.statusText}`);
           }
-          return; // Salir si hay error
-        }
-  
-        return res.json(); // Procesar respuesta válida
-      })
-      .then(data => {
-        if (!data) return; // Evitar procesar si hubo error antes
-  
-        if (data.success) {
-          console.log("Login exitoso:", /*data*/);
-  
-          // Guardar datos en el almacenamiento local
-          localStorage.setItem("token", data.token);
-          localStorage.setItem("user", JSON.stringify(data.user));
-  
-          // Llamar a la función de login y redirigir según el rol
-          login(data.user, data.token);
-  
-          if (data.user.rol === 'admin') {
-            navigate('/admin-account/products');
+          return data;
+        })
+        .then((data) => {
+          if (data.success) {
+            console.log("Login exitoso:", data);
+    
+            // Guardar datos y redirigir
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            login(data.user, data.token);
+    
+            if (data.user.rol === "admin") {
+              navigate("/admin-account/products");
+            } else {
+              navigate("/account/favorites");
+            }
           } else {
-            navigate('/account/favorites');
+            throw new Error(data?.message || "Hubo un error desconocido.");
           }
-        } else {
-          setErrorMessage(data?.message || 'Hubo un error desconocido.');
-        }
-      })
-      .catch(error => {
-        console.error('Error al hacer login:', error);
-        setErrorMessage("Error desconocido. Intenta de nuevo.");
-      })
-      .finally(() => {
-        // Limpiar mensaje de error después de 2 segundos
-        setTimeout(() => setErrorMessage(''), 2000);
-      });
-  };
+        })
+        .catch((error) => {
+          console.error("Error al hacer login:", error);
+          setErrorMessage(error.message);
+        })
+        .finally(() => {
+          setTimeout(() => setErrorMessage(""), 2000);
+        });
+    };
   
 
   return (
