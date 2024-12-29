@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApiProvider } from '../../utils/ApiContext';
 import { FormComponent } from '../../components/FormComponent/FormComponent';
+import { Message } from '../../components/Message/Message';
 
 
 export const CreateCategory = () => {
@@ -11,9 +12,9 @@ export const CreateCategory = () => {
   const navigate = useNavigate();
 
   const fields = [
-    { name: 'categoryName', label: 'Categoría', type: 'text', placeholder: 'ej: bolsos', required: true },
-    { name: 'img', label: 'Imagen', type: 'file', required: true },
-    { name: 'visible', label: 'Visible', type: 'checkbox', className: 'customCheckbox' }
+    { name: 'categoryName', label: 'Categoría', type: 'text', placeholder: 'ej: bolsos', required: true, id: 'categoryName' },
+    { name: 'img', label: 'Imagen', type: 'file', required: true, id: 'img' },
+    { name: 'visible', label: 'Visible', type: 'checkbox', className: 'customCheckbox', id: 'visible' }
   ];
 
   const handleCreateCategory = (formData) => {
@@ -30,7 +31,7 @@ export const CreateCategory = () => {
         // Solicitud POST a la API del registro
         fetch(`${apiUrl}/create-category`, {
           method: 'POST',
-          body: form, // Enviamos los datos como FormData
+          body: form, // Enviamos los datos como form
         })
         .then((res) => {
           if (!res.ok) {
@@ -40,18 +41,20 @@ export const CreateCategory = () => {
         })
         .then((data) => {
           if (data.success) {
-            setSuccessMessage('¡Categoría creada!');
+            setSuccessMessage('Creando categoría...');
             setTimeout(() => {
-                setSuccessMessage('');
-                navigate('/admin-account/categories'); 
+              setSuccessMessage('Categoría creada!');
+              setTimeout(() => {
+                navigate('/admin-account/categories');
+              }, 1000);
             }, 1500);
           } else {
-            setErrorMessage(data.message || 'Hubo un error al subir la categoría');
+            setErrorMessage(data.message || 'Hubo un error al crear la categoría');
             setTimeout(() => setErrorMessage(''), 1500);
           }
         })
         .catch((error) => {
-          console.error('Error al subir la categoría:', error);
+          console.error('Error al crear la categoría:', error);
           setErrorMessage(error.message || 'Error desconocido. Intenta de nuevo.');
           setTimeout(() => setErrorMessage(''), 1500);
         });
@@ -60,21 +63,8 @@ export const CreateCategory = () => {
   return (
     <>
       <FormComponent fields={fields} text="SUBIR CATEGORÍA" onSubmit={handleCreateCategory} />
-      {errorMessage && (
-      <div>
-        <p style={{ color: 'var(--color-error)', marginTop: '10px' }}>
-        {errorMessage}
-        </p> 
-      </div>
-    )}
-    
-    {successMessage && (
-      <div>
-      <p style={{ color: 'var(--color-success)', marginTop: '10px' }}>
-        {successMessage}
-      </p>
-      </div>
-    )}
+      {successMessage && <Message textMessage={successMessage} />}
+      {errorMessage && <Message textMessage={errorMessage} />}
       </>
   );
 };

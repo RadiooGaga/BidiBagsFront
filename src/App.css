@@ -18,7 +18,7 @@
   justify-content: space-between;
 }
 
-h1, h2, h3 li, a, p, span {
+h1, h2, h3, li, a, p, span {
   color: var(--color-text);
   text-decoration: none;
 }

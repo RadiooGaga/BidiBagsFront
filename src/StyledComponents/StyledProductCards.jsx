@@ -14,11 +14,24 @@ import styled from "styled-components";
     gap: var(--gap-s);
     cursor: pointer;
 
-      @media screen and (max-width: 480px) {
-         gap: var(--gap-m);
+    @media screen and (max-width: 769px) {
+        width: 200px;
+        height: auto;
+        gap: var(--gap-m);
     }
 
-   
+    @media screen and (min-width: 770px) and (max-width: 1023px) {
+        width: 240px;
+        height: auto;
+        gap: var(--gap-m);
+    }
+
+    @media screen and (min-width: 1024px) and (max-width: 1443px){
+        width: 300px;
+        height: auto;
+        gap: var(--gap-l);
+    }
+ 
 `
 
 const DivImgProductCard = styled.div `
@@ -28,12 +41,32 @@ const DivImgProductCard = styled.div `
     width: 100%;
     height: 320px;
     gap: var(--gap-s);
+
+    @media screen and (max-width: 769px) {
+        width: 100%;
+        height: 200px;
+    }
+
+    @media screen and (min-width: 770px) and (max-width: 1023px) {
+        width: 100%;
+        height: 200px;
+    }
 `
 
 const ProductCardPic = styled.img `
     width: 100%;
     height: 320px;
     object-fit: cover;
+
+    @media screen and (max-width: 769px) {
+        width: 100%;
+        height: 200px;
+    }
+
+    @media screen and (min-width: 770px) and (max-width: 1023px) {
+        width: 100%;
+        height: 200px;
+    }
 `
 
 
@@ -42,6 +75,12 @@ const ProductDetails = styled.div `
     display: flex;
     justify-content: space-between;
     align-items:center;
+
+    @media screen and (max-width: 769px){
+        display: flex;
+        flex-direction: column;
+        gap: var(--gap-m)
+    }
 `
 
 
@@ -152,7 +191,7 @@ const DecisionButtons = styled.div `
 
 const Details = styled.div  `
     display: flex;
-    justify-content: center;
+    justify-content: start;
     float: right;
     width: 100%;
     height: auto;

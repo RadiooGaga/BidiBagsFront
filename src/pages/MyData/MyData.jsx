@@ -11,25 +11,23 @@ export const MyData = () => {
   const { user, token, updateUser } = useAuth();
   const [userData, setUserData] = useState(null);
   const [ userDataVisible, setUserDataVisible ] = useState(true);
-  const [formVisible, setFormVisible] = useState(false); 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [message, setMessage] = useState('');
+  const [ formVisible, setFormVisible ] = useState(false); 
+  const [ loading, setLoading ] = useState(false);
+  const [ error, setError ] = useState(null);
+  const [ message, setMessage ] = useState('');
 
   const fields = [
-    { name: 'email', label: 'Email', for: 'email', type: 'email', placeholder: 'tuemail@gmail.com', autocomplete: 'email', required: true },
-    { name: 'password', label: 'Contraseña', for: 'password',  type: 'password', placeholder: '*************', autocomplete: 'current-password', required: true },
-    { name: 'shippingAdress', label: 'Dirección de Envío', for: 'shippingAdress',
+    { name: 'shippingAdress', label: 'Dirección de Envío', class: "label1", for: 'shippingAdress',
       fields: [
-        { name: 'street', label: '', for: 'street', placeholder: 'Dirección de envío', type: 'text', required: true },
+        { name: 'street', label: 'Dirección', for: 'street', type: 'text', required: true },
         { name: 'city', label: 'Ciudad', for: 'city', type: 'text', required: true },
         { name: 'postalCode', label: 'Código Postal', for:  'postalCode',  type: 'text', required: true },
         { name: 'country', label: 'País', for:  'country',  type: 'text', required: true }
       ],
     },
-    { name: 'billingAdress', label: 'Dirección de Facturación',
+    { name: 'billingAdress', label: 'Dirección de Facturación', class: "label2", for: 'billingAdress',
       fields: [
-        { name: 'street2', label: '', for: 'street2', placeholder: 'Dirección de facturación', type: 'text', required: true },
+        { name: 'street2', label: 'Dirección', for: 'street2', type: 'text', required: true },
         { name: 'city2', label: 'Ciudad', for: 'city2', type: 'text',  required: true },
         { name: 'postalCode2', label: 'Código Postal', for: 'postalCode2', type: 'text', required: true },
         { name: 'country2', label: 'País', for:  'country2',  type: 'text', required: true },
@@ -74,11 +72,16 @@ export const MyData = () => {
   const handleUpdate = (formData) => {
     const userId = user._id;
     const requestData = {
-      email: formData.email,
-      password: formData.password,
       shippingAddress: formData.shippingAdress,
       billingAddress: formData.billingAdress,
     };
+
+
+    // Solo incluir la contraseña si está presente y es válida
+  if (formData.password && formData.password !== user.password) {
+    requestData.password = formData.password;
+  }
+
 
     fetch(`${apiUrl}/update-user/${userId}`, {
       method: 'PUT',
@@ -93,7 +96,7 @@ export const MyData = () => {
         if (data && data.user) {
           updateUser(data.user);
           setMessage('Datos actualizados!');
-          setFormVisible(false); // Oculta el formulario después de actualizar
+          setFormVisible(false);
         } else {
           setMessage('Hubo un error al actualizar los datos.');
         }

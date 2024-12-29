@@ -13,6 +13,7 @@ export const NavBarAccount = () => {
     { to: `my-data/${user._id}`, label: "MIS DATOS", alt: "myData"},
     { to: "favorites", label: "MIS FAVORITOS", alt: "myFavorites"},
     { to: "order-status", label: "ESTADO DEL PEDIDO", alt: "myOrderStatus"},
+    { to: "payment-methods", label: "MÉTODOS DE PAGO", alt: "paymentMethods"},
     { to: "changes-and-returns", label: "CAMBIOS / DEVOLUCIONES", alt: "myChanges"},
     { to: "signout", label: "MI CUENTA", alt: "signout" },
   ];
@@ -23,12 +24,10 @@ export const NavBarAccount = () => {
       <AccountNavUl>
         {navItems.map((item, index) => (
           <li key={index} >
-            <NavLink 
-              key={index}
+          <NavLink 
               to={item.to} 
-              className={({ isActive }) => isActive ? `active` : ''
-            }
-            alt={item.alt}
+              className={({ isActive }) => isActive ? 'active' : ''}
+              aria-label={item.alt} // Usamos aria-label para la accesibilidad
             >
               <StyledLabel>{item.label}</StyledLabel>
             </NavLink>

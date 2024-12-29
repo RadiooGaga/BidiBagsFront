@@ -8,11 +8,15 @@ const SectionMyAccount = styled.section `
     padding: var(--padding-l);
 
     @media screen and (max-width: 769px) {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      padding: var(--padding-m);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: var(--padding-m);
+    }
+      
+    @media screen and (min-width: 770px) and (max-width: 1023px){
+        padding: var(--padding-m);
     }
 `;
 
@@ -21,9 +25,14 @@ const DowloadCsvDiv = styled.div `
     flex-direction: column;
     width: 100%;
     height: auto;
-    padding: var(--padding-s);
+    padding: var(--padding-l);
 
+    @media screen and (max-width: 1023px){
+        align-items: center;
+        gap: var(--gap-m);
+    }
 `
+
 
 const AccountDiv = styled.div `
     display: flex;
@@ -41,6 +50,22 @@ const AccountDiv = styled.div `
     @media screen and (max-width: 480px) {
         width: 100%;
         padding: 0;
+        gap: var(--gap-s);
+        padding-bottom: var(--padding-l);
+    }
+
+    @media screen and (min-width: 481px) and (max-width: 769px) {
+        width: 100%;
+        padding: 0;
+        gap: var(--gap-m);
+        padding-bottom: var(--padding-l);
+    }
+
+    @media screen and (min-width: 770px) and (max-width: 1023px){
+        width: 100%;
+        padding: 0;
+        gap: var(--gap-m);
+        padding-bottom: var(--padding-l);
     }
 }
 `
@@ -60,6 +85,10 @@ const AccountNavDiv = styled.nav `
       margin-bottom: var(--margin-l);
       padding: var(--padding-s);
     }
+
+    @media screen and (min-width: 770px) and (max-width: 1023px){
+        margin: 0px;
+    }
 `
 
 const AccountNavUl = styled.ul `
@@ -70,8 +99,10 @@ const AccountNavUl = styled.ul `
     justify-content: space-around;
 `
 
-const StyledLabel = styled.label `
+const StyledLabel = styled.span `
+    align-self: center;
     font-family: var(--font-walkway);
+    font-size: var(--font-size-m);
     cursor: pointer;
 `
 

@@ -57,9 +57,9 @@ export const useApi = ({ endpoint, url }) => {
                 console.error("Error al obtener los datos:", err);
                 dispatch({ type: 'FETCH_FAILURE', payload: err });
             });
-    }, [endpoint, apiUrl, url]); 
+    }, [ endpoint, apiUrl, url ]); 
 
-    return { ...state };
+    return { ...state, dispatch };
 };
 
 

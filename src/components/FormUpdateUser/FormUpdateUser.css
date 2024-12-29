@@ -15,6 +15,14 @@
     align-items: flex-start;  
 }
 
+.field-group {
+    margin-bottom: var(--margin-l);
+}
+
+.field-group h3 {
+    margin-bottom: var(--margin-l);
+}
+
 label {
     align-self: start;
     font-family: var( --font-walkway);

@@ -7,7 +7,7 @@ const { AccountNavDiv, AccountNavUl, StyledLabel } = StyledMyAccountPages;
 export const NavBarAdminAccount = () => {
 
   const navItems = [
-    { to: "products", label: "TODOS MIS PRODUCTOS", alt: "allMyProducts" },
+    { to: "products", label: "TODOS MIS PRODUCTOS",  alt: "allMyProducts" },
     { to: "categories", label: "TODAS MIS CATEGORÍAS", alt: "allMyCategories" },
     { to: "create-category", label: "CREAR CATEGORIA", alt: "createCategory" },
     { to: "create-product", label: "CREAR PRODUCTO", alt: "createProduct" },
@@ -24,12 +24,10 @@ export const NavBarAdminAccount = () => {
       {navItems.map((item, index) => (
         <li key={index} >
           <NavLink 
-            key={index}
-            to={item.to} 
-            className={({ isActive }) => isActive ? `active` : ''
-          }
-          alt={item.alt}
-          >
+              to={item.to} 
+              className={({ isActive }) => isActive ? 'active' : ''}
+              aria-label={item.alt} 
+            >
             <StyledLabel>{item.label}</StyledLabel>
           </NavLink>
         </li>

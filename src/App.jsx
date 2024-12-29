@@ -31,6 +31,7 @@ import { BlogEditor } from './components/BlogEditor/BlogEditor';
 import { MyData } from './pages/MyData/MyData';
 import { MyFavorites } from './pages/MyFavorites/MyFavorites';
 import { MyOrderStatus } from './pages/MyOrderStatus/MyOrderStatus';
+import { MyPaymentMethods } from './pages/MyPaymentMethods/MyPaymentMethods';
 import { MyChanges } from './pages/MyChanges/MyChanges';
 import { SignOut } from './pages/SignOut/SignOut';
 import { ShoppingCart } from './pages/ShoppingCart/ShoppingCart';
@@ -41,6 +42,7 @@ import { Contact } from './pages/FooterPages/Contact';
 import { Legal } from './pages/FooterPages/Legal';
 import { Terms } from './pages/FooterPages/Terms';
 import { Footer } from './components/Footer/Footer';
+
 
 
 
@@ -86,6 +88,7 @@ export const App = () => {
             <Route path="my-data/:id" element={<MyData />} />
             <Route path="favorites" element={<MyFavorites />} />
             <Route path="order-status" element={<MyOrderStatus />} />
+            <Route path="payment-methods" element={<MyPaymentMethods />} />
             <Route path="changes-and-returns" element={<MyChanges />} />
             <Route path="signout" element={<SignOut />} />
           </Route>

@@ -40,6 +40,30 @@ const Titles = styled.span `
 `
 
 
+//CARRITO
+const CartDiv = styled.div `
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+    align-items: start;
+    width: 100%;
+    min-height: 60vh;
+    padding: var(--padding-s);
+    gap: var(--gap-xl)
+`
+
+const TotalPriceDiv = styled.div`
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    min-height: 80px; 
+    background-color: var(--color-headerandfooter);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
+    padding: var(--padding-m);
+    gap: var(--gap-xl)
+`;
+
 
 // MI CUENTA / CIERRE DE SESION
 const UserAccountDiv = styled.div `
@@ -77,6 +101,8 @@ export default {
     DataDiv, 
     SomeSpace,
     FavoritesDiv, 
+    CartDiv,
+    TotalPriceDiv,
     Titles, 
     UserAccountDiv, 
     SessionDiv, 

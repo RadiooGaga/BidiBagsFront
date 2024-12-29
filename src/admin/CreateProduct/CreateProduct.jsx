@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApiProvider } from '../../utils/ApiContext';
 import { FormComponent } from '../../components/FormComponent/FormComponent';
+import { Message } from '../../components/Message/Message';
 
 
 export const CreateProduct = () => {
   const { apiUrl } = useApiProvider();
+  const [ successMessage, setSuccessMessage ] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
@@ -13,7 +15,7 @@ export const CreateProduct = () => {
     { name: 'categoryName', label: 'Categoría', placeholder: 'categoría a la que pertenece', type: 'text', required: true },
     { name: 'collectionName', label: 'Colección', placeholder: 'nombre de la colección', type: 'text', required: true },
     { name: 'img', label: 'Imagen', type: 'file', required: true },
-    { name: 'price', label: 'Precio', type: 'number', required: true },
+    { name: 'price', label: 'Precio', placeholder: 'ejemplo: 30', type: 'number', required: true },
     { name: 'inStock', label: 'En Stock', type: 'checkbox', className: 'customCheckbox' },
     { name: 'description', label: 'Descripción breve del producto', type: 'text', required: true },
     { name: 'details', label: 'Detalles del producto', type: 'textarea', required: true },
@@ -25,7 +27,7 @@ export const CreateProduct = () => {
       return;
     }
   
-   // Crear un FormData para enviar los datos incluyendo la imagen como archivo
+   // FormData para enviar los datos incluyendo la imagen como archivo
    const form = new FormData();
    form.append('categoryName', formData.categoryName);
    form.append('collectionName', formData.collectionName);
@@ -35,10 +37,11 @@ export const CreateProduct = () => {
    form.append('details', formData.details);
    form.append('img', formData.img); 
 
+
         // Solicitud POST a la API del registro
         fetch(`${apiUrl}/create-product`, {
           method: 'POST',
-          body: form, // Enviamos los datos como FormData
+          body: form, // Enviamos los datos del form
         })
         .then((res) => {
           if (!res.ok) {
@@ -48,8 +51,13 @@ export const CreateProduct = () => {
         })
         .then((data) => {
           if (data.success) {
-            console.log(data, 'Producto creado!');
-            navigate('/all-products'); 
+            setSuccessMessage('Creando producto...');
+            setTimeout(() => {
+              setSuccessMessage('Producto creado!');
+              setTimeout(() => {
+                navigate('/admin-account/products');
+              }, 1000);
+            }, 1500);
           } else {
             setErrorMessage(data.message || 'Hubo un error al subir el producto');
             setTimeout(() => setErrorMessage(''), 2000);
@@ -65,7 +73,8 @@ export const CreateProduct = () => {
   return (
     <>
       <FormComponent fields={fields} text="SUBIR PRODUCTO" onSubmit={handleRegister} />
-      {errorMessage && <p>{errorMessage}</p>}
+      {successMessage && <Message textMessage={successMessage} />}
+      {errorMessage && <Message textMessage={errorMessage} />}
     </>
   );
 };

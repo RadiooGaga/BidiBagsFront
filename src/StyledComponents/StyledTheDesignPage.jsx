@@ -2,96 +2,77 @@ import styled from "styled-components";
 
 const SectionTheDesign = styled.section `
     display: flex;
-    flex-direction: row;
     flex-wrap:wrap;
     align-items:center;
     width: 95%;
     min-height: 80vh;
     box-sizing: border-box;
     padding: var(--padding-l) var(--padding-m);
-    margin-bottom: var(--margin-l);
 `
 
 const DesignStory = styled.div `
-    width: 40%;
-    float:left;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-right: 30px; /* Espacio entre el texto y la imagen */
+    width: 100%;
+    display: block;
+    min-height: 80vh;
+    margin: 0 auto;
+    padding: var(--padding-l);
 
     @media screen and (max-width: 768px) {
         width: 100%;
-          margin-right: 0px; 
-          float: none;
+        display: flex;
+        flex-direction: column; 
+        padding: var(--padding-s);
     }
 `;
 
 
 const Figure = styled.figure `
-    display: flex;
-    width: 100%;
-    height:auto;
-    flex-direction: column;
+    width: 40%;
+    float: left;
+    margin: 0 var(--margin-l) var(--margin-s) 0; 
 
     @media screen and (max-width: 768px){
-        align-items: flex-start;
         width: 100%;
+    }
+
+    @media screen and (min-width: 769px) and (max-width: 1443px){
+        width: 60%;
     }
 
 `
 
 const DesignerImg = styled.img `
-    max-width: 34em;
-    margin: 30px 0 30px 30px;
+    width: 100%;
     object-fit: cover;
     /*filter: grayscale(100%);*/
 
  @media screen and (max-width: 768px){
     width:100%;
     margin:0;
-    padding: 0 var(--padding-m);
  }
     
 `
 
 const FigCaption = styled.figcaption `
     display: flex;
+    width: 100%;
     font-family: var( --font-walkway);
     color: var(--color-text);
     font-weight: 100;
     font-size: var(--font-size-s);
-    padding: 0 30px 12px 30px;
+    padding: 0 30px 12px 0px;
     align-self: flex-start;
 
     @media screen and (max-width: 768px) {
-         padding: 0 0 0 var(--padding-m);
+        padding: var(--padding-s) 0;
     }
-
 `
 
-const DesignStoryH2 = styled.h2 `
-    font-family: var( --font-sansation);
-    font-weight: 100;
-    font-size: var(--font-size-m);
-    color: var(--color-text);
-    margin-left:30px;
-
-    @media screen and (max-width: 768px) {
-        padding: 0 0 var(--padding-m);
-    }
-
-`
 
 const DesignStoryParagraph = styled.p `
-    display:flex;
-    flex-wrap;wrap;
-    width: 50%;
-    flex: 1 1 auto;
+    display: block;
+    width: 100%;
     margin: 0;
-    padding: var(--padding-m);
-    z-index:1;
- 
 
   @media screen and (max-width: 768px) {
     width: 100%;
@@ -106,6 +87,6 @@ export default {
     Figure,
     FigCaption,
     DesignerImg,
-    DesignStoryH2,
     DesignStoryParagraph
 }
+

@@ -5,6 +5,7 @@ import { useApiProvider } from '../../utils/ApiContext';
 import { Button } from '../../components/Button/Button';
 import { Card } from '../../components/ProductCards/Card';
 import { Warning } from '../../components/Warning/Warning';
+import { Message } from '../../components/Message/Message';
 import StyledMyAccountPages from '../../StyledComponents/StyledMyAccountPages';
 const { DowloadCsvDiv, Titles } = StyledMyAccountPages;
 
@@ -19,7 +20,11 @@ export const AllMyCategories = () => {
   const [showWarning, setShowWarning] = useState(false); 
   const [categoryToDelete, setCategoryToDelete] = useState(null);
   
-  const { categories, loading, error } = useApi({ endpoint: `/categories`, url: '' });
+  const { categories, loading, error, dispatch  } = useApi({ endpoint: `/categories`, url: '' });
+
+  const handleUpdate = (id) => {
+    navigate(`/admin-account/update-category/${id}`)
+  }
 
   const handleOpenWarning = (id) => {
     setCategoryToDelete(id);
@@ -30,39 +35,12 @@ export const AllMyCategories = () => {
     setShowWarning(false);
   };
 
-  //BORRAR CATEGORÍA
-  const handleDeleteItem = () => {
 
-    if (!categoryToDelete) return;
-
-    fetch(`${apiUrl}/delete-category/${categoryToDelete}`, {
-      method: 'DELETE',
-    })
-    .then((res) => {
-      if (!res.ok) {
-        if (res.status === 404) setErrorMessage('404: Error al eliminar la categoría');
-      }
-      return res.json();
-    })
-    .then((data) => {
-      if (data.success) {
-        setSuccessMessage('Categoría eliminada!');
-        setShowWarning(false);
-        setCategoryToDelete(null);
-        setTimeout(() => {
-          navigate('/admin-account/categories');
-        }, 1500); 
-      } else {
-        setErrorMessage(data.message || 'Hubo un error al actualizar la categoría');
-        setTimeout(() => setErrorMessage(''), 2000);
-      }
-    })
-    .catch((error) => {
-      console.error('Error al actualizar la categoría:', error);
-      alert('Error al eliminar la categoría');
-    });
-  }
-
+  // determina si la categoría está visible para el usuario
+  const getVisibilityText = (visible) => {
+    return visible ? "visible" : "oculto";
+  };
+  
 
 
   //descargar csv
@@ -91,17 +69,57 @@ export const AllMyCategories = () => {
     }
   };
 
-  const handleUpdate = (id) => {
-    navigate(`/admin-account/update-category/${id}`)
-  }
-
-  // determina si la categoría está visible para el usuario
-  const getVisibilityText = (visible) => {
-    return visible ? "visible" : "oculto";
-  };
 
   if (loading) return <p>Cargando categorías...</p>;
   if (error) { <Error text="Hubo un error al cargar las categorias. Por favor, inténtalo de nuevo." />}
+
+
+    //BORRAR CATEGORÍA
+    const handleDeleteItem = () => {
+
+      if (!categoryToDelete) return;
+  
+      fetch(`${apiUrl}/delete-category/${categoryToDelete}`, {
+        method: 'DELETE',
+      })
+      .then((res) => {
+        if (!res.ok) {
+          if (res.status === 404) setErrorMessage('404: Error al eliminar la categoría');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (data.success) {
+          setSuccessMessage('Eliminando categoría...');
+          setCategoryToDelete(null);
+
+          // Actualizar el estado manualmente para eliminar la categoría
+          dispatch({
+            type: 'FETCH_SUCCESS',
+            payload: {
+              categories: categories.filter(category => category._id !== categoryToDelete)
+            }
+          });
+
+          setTimeout(() => {
+            setSuccessMessage('Categoría eliminada!');
+            setTimeout(() => {
+              setSuccessMessage('');
+              setShowWarning(false);
+              navigate('/admin-account/categories');
+            }, 1000);
+          }, 1000);
+        } else {
+          setErrorMessage(data.message || 'Hubo un error al eliminar la categoría');
+          setTimeout(() => setErrorMessage(''), 2000);
+        }
+      })
+      .catch((error) => {
+        console.error('Error al eliminar la categoría:', error);
+        alert('Error al eliminar la categoría');
+      });
+    }
+
 
   return (
     <>
@@ -111,6 +129,7 @@ export const AllMyCategories = () => {
           onClose={handleCloseWarning}
           onClick={handleDeleteItem}
         />
+        
       )}
       <DowloadCsvDiv>
         <Titles>TODAS MIS CATEGORÍAS</Titles>
@@ -147,10 +166,12 @@ export const AllMyCategories = () => {
               backgroundColor={"transparent"}
               onClick={() => handleOpenWarning(category._id)} 
               />
-              </Card>
-                   
+              </Card>     
           ))
         )}
+
+        {successMessage && <Message textMessage={successMessage} />}
+        {errorMessage && <Message textMessage={errorMessage} />}
       </>
   );
 } 

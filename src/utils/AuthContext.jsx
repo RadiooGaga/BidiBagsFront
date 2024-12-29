@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-
+      
       const response = await fetch(`${apiUrl}/update-user/${user._id}`, {
         method: 'PUT', 
         headers: {
@@ -119,8 +119,46 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+
+
+    // MÉTODO AÑADIR/ELIMINAR DEL CARRITO
+    const toggleCart = async (product) => {
+
+      if (!user || !user.cart) {
+        console.error("El usuario no está autenticado o no tiene productos en el carrito.");
+        return;
+      }
+    
+      const productId = product._id;
+        if (!productId) {
+          console.error("Producto inválido proporcionado a toggleCart:", product);
+          return;
+        }
+    
+      const isOnCart = user.cart.includes(productId);
+    
+      // Crear el nuevo array de productso del carrito
+      const updatedCart = isOnCart
+        ? user.cart.filter((id) => id !== productId) // se elimina si ya está en el carrito
+        : [...user.cart, productId]; // se agrega si no lo es
+    
+      try {
+        // se actualiza el backend
+        const updatedUser = await updateUser({ cart: updatedCart });
+  
+        // Actualizar el estado local del usuario en el contexto
+        setUser(updatedUser); 
+    
+        //console.log("Productos del carrito actualizados:", updatedCart);
+      } catch (error) {
+        console.error("Error al actualizar los productos del carrito en el backend:", error);
+        alert("Hubo un problema al actualizar tu carrito. Por favor, inténtalo de nuevo.");
+      }
+    };
+
+
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, updateUser, toggleFavorite }}>
+    <AuthContext.Provider value={{ user, token, login, logout, updateUser, toggleFavorite, toggleCart }}>
       {children}
     </AuthContext.Provider>
   );

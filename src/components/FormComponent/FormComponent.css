@@ -29,6 +29,9 @@ label {
     height: 120px;
     overflow-y: scroll;
     margin-bottom: var(--margin-m);
+    font-family: var( --font-walkway);
+    font-size: var(--font-size-ms);
+    color: rgb(150, 148, 148);
 }
 
 input {

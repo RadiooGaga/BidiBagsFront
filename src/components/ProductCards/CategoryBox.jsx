@@ -3,7 +3,7 @@ import StyledCategoryCards from "../../StyledComponents/StyledCategoryCards";
 const { Cube, Side, CategoryTitle} = StyledCategoryCards;
 
 
-export const CategoryBox = ({  img, categoryName, onClick }) => {
+export const CategoryBox = React.memo(({  img, categoryName, onClick }) => {
 
    const [rotateY, setRotateY] = useState(0);
    const handleMouseEnter = () => setRotateY(180);
@@ -28,4 +28,4 @@ export const CategoryBox = ({  img, categoryName, onClick }) => {
       </Side>
     </Cube>
   );
-};
+});
