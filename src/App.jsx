@@ -25,7 +25,7 @@ import { CreateProduct } from './admin/CreateProduct/CreateProduct';
 import { UpdateProduct } from './admin/Update/UpdateProduct';
 import { UpdateCategory } from './admin/Update/UpdateCategory';
 import { Stock } from './admin/Stock/Stock';
-import { BlogEditor } from './components/BlogEditor/BlogEditor';
+import { BlogEditor } from './admin/BlogEditor/BlogEditor';
 
 
 import { MyData } from './pages/MyData/MyData';

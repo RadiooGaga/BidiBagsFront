@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from '../../utils/AuthContext';
 import { useApiProvider } from '../../utils/ApiContext';
 import { FormComponent } from '../../components/FormComponent/FormComponent';
+import { Message } from '../../components/Message/Message';
 
 
 export const UpdateProduct = () => {
 
-  const { id } = useParams()
- const { apiUrl } = useApiProvider();
- const [ updateProductData, setUpdateProductData] = useState(null);
- const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const { id } = useParams();
+  const { token } = useAuth(); 
+  const { apiUrl } = useApiProvider();
+  const [ updateProductData, setUpdateProductData] = useState(null);
+  const [ successMessage, setSuccessMessage ] = useState('');
+  const [ errorMessage, setErrorMessage ] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,6 +54,9 @@ export const UpdateProduct = () => {
     });
 
         fetch(`${apiUrl}/update-product/${id}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
           method: 'PATCH',
           body: form,
         })
@@ -89,21 +95,11 @@ export const UpdateProduct = () => {
       />
     ) : ( <p>cargando datos...</p>
     )}
-    {errorMessage && (
-      <div>
-        <p style={{ color: 'var(--color-error)', marginTop: '10px' }}>
-        {errorMessage}
-        </p> 
-      </div>
-    )}
+
+    {successMessage && <Message textMessage={successMessage} />}
+    {errorMessage && <Message textMessage={errorMessage} />}
     
-    {successMessage && (
-      <div>
-      <p style={{ color: 'var(--color-success)', marginTop: '10px' }}>
-        {successMessage}
-      </p>
-      </div>
-    )}
     </>
   );
 };
+

@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from '../../utils/AuthContext';
 import { useApiProvider } from '../../utils/ApiContext';
 import { FormComponent } from '../../components/FormComponent/FormComponent';
-import { Warning } from '../../components/Warning/Warning';
+import { Message } from '../../components/Message/Message';
 
 
 export const UpdateCategory = () => {
 
   const { id } = useParams()
   const { apiUrl } = useApiProvider();
+  const { token } = useAuth();
   const [ updateCategoryData, setUpdateCategoryData] = useState(null);
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [ successMessage, setSuccessMessage ] = useState('');
+  const [ errorMessage, setErrorMessage ] = useState('');
   const navigate = useNavigate();
 
 
@@ -51,6 +53,9 @@ export const UpdateCategory = () => {
     });
 
       fetch(`${apiUrl}/update-category/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
         method: 'PATCH',
         body: form,
       })
@@ -79,8 +84,6 @@ export const UpdateCategory = () => {
   };
 
 
-
-
   return (
     <>
     {updateCategoryData ? (
@@ -92,13 +95,9 @@ export const UpdateCategory = () => {
       />
     ) : ( <p>cargando datos...</p>
     )}
-    {errorMessage && (
-      <div>
-        <p style={{ color: 'var(--color-error)', marginTop: '10px' }}>
-        {errorMessage}
-        </p> 
-      </div>
-    )}
+
+    {successMessage && <Message textMessage={successMessage} />}
+    {errorMessage && <Message textMessage={errorMessage} />}
     </>
   );
 };

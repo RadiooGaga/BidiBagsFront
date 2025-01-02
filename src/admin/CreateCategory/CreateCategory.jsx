@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../utils/AuthContext';
 import { useApiProvider } from '../../utils/ApiContext';
 import { FormComponent } from '../../components/FormComponent/FormComponent';
 import { Message } from '../../components/Message/Message';
 
 
 export const CreateCategory = () => {
+
+
   const { apiUrl } = useApiProvider();
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const { token } = useAuth();
+  const [ successMessage, setSuccessMessage ] = useState('');
+  const [ errorMessage, setErrorMessage ] = useState('');
   const navigate = useNavigate();
 
   const fields = [
@@ -30,6 +34,9 @@ export const CreateCategory = () => {
 
         // Solicitud POST a la API del registro
         fetch(`${apiUrl}/create-category`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
           method: 'POST',
           body: form, // Enviamos los datos como form
         })

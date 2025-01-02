@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../utils/AuthContext';
 import { useApiProvider } from '../../utils/ApiContext';
 import { FormComponent } from '../../components/FormComponent/FormComponent';
 import { Message } from '../../components/Message/Message';
 
 
 export const CreateProduct = () => {
+
+
   const { apiUrl } = useApiProvider();
+  const { token } = useAuth();
   const [ successMessage, setSuccessMessage ] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [ errorMessage, setErrorMessage ] = useState('');
   const navigate = useNavigate();
 
   const fields = [
@@ -40,6 +44,9 @@ export const CreateProduct = () => {
 
         // Solicitud POST a la API del registro
         fetch(`${apiUrl}/create-product`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          },
           method: 'POST',
           body: form, // Enviamos los datos del form
         })

@@ -18,7 +18,7 @@ export const CardDetails = React.memo(({ product, isFavorite, heartClicked, onSu
   const productId = product._id;
 
   const { apiUrl } = useApiProvider();
-  const { user } = useAuth();
+  const { user, token } = useAuth();
   const [ errorMessage, setErrorMessage ] = useState('');
   const [ successMessage, setSuccessMessage ] = useState('');
   const [ productToDelete, setProductToDelete ] = useState(null);
@@ -46,6 +46,11 @@ export const CardDetails = React.memo(({ product, isFavorite, heartClicked, onSu
 
     fetch(`${apiUrl}/delete-product/${productToDelete}`, {
       method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+     
     })
     .then((res) => {
       if (!res.ok) {
@@ -97,20 +102,23 @@ export const CardDetails = React.memo(({ product, isFavorite, heartClicked, onSu
             <ProductCardH2>{product.collection}</ProductCardH2>
             <ProductCardH3>€{product.price}</ProductCardH3>
             <SpanContent>{product.inStock ? 'En stock' : 'Sin stock'}</SpanContent>
-           
-            <Button type="button" backgroundColor="transparent" >
-              <Heart
-                src={ isFavorite ? '/assets/icons/heart.png' : '/assets/icons/emptyHeart.png'}
-                alt="add to favorites"
-                onClick={heartClicked}
-              />
+            <Button type="button" backgroundColor="transparent">
+
+              {/* El corazón sólo es accesible tanto si no hay usuario logueado como si es rol 'user' */}
+              {(user && user.rol === 'user') || !user ? (
+                <Heart
+                  src={isFavorite ? '/assets/icons/heart.png' : '/assets/icons/emptyHeart.png'}
+                  alt="add to favorites"
+                  onClick={heartClicked}
+                />
+              ) : null}
             </Button>
           </Intro>
           <TextContent>
             <Description>
               <Paragraph>{product.description}</Paragraph>
               <DecisionButtons>
-              {user && user.rol === 'user' && ( 
+             {(user && user.rol === 'user') || !user ? (
               <Button
                 type="button"
                 text="AÑADIR AL CARRITO"
@@ -121,7 +129,7 @@ export const CardDetails = React.memo(({ product, isFavorite, heartClicked, onSu
                 hoverBackgroundColor="var(--color-barbiePink)"
                 tapBackgroundColor="var(--color-pushTheButton)"
                 onClick={onAddToCart}
-              />)} 
+              />) : null } 
               
               {user && user.rol === 'admin' && ( 
                 <>

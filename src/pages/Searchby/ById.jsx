@@ -62,11 +62,6 @@ export const ById = () => {
     await toggleFavorite(product); // Actualiza backend y contexto
   };
   
-/*
-  const handleAddToCart = async (product) => {
-    await toggleCart(product); // Actualiza backend y contexto
-    console.log('Producto añadido al carrito:', product);
-  };*/
 
   if (loading) return <Error text="Cargando el producto" />;
   if (error) return <Error text="Hubo un error al cargar el producto. Por favor, inténtalo de nuevo." />;

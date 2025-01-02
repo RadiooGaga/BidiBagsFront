@@ -1,6 +1,7 @@
 import React, { useState }  from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useApi } from '../../utils/useApi';
+import { useAuth } from '../../utils/AuthContext';
 import { useApiProvider } from '../../utils/ApiContext';
 import { Button } from '../../components/Button/Button';
 import { Card } from '../../components/ProductCards/Card';
@@ -14,6 +15,7 @@ const { DowloadCsvDiv, Titles } = StyledMyAccountPages;
 export const AllMyCategories = () => {
 
   const { apiUrl } = useApiProvider();
+  const { token } = useAuth();
   const navigate = useNavigate()
   const [ errorMessage, setErrorMessage ] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -80,6 +82,9 @@ export const AllMyCategories = () => {
       if (!categoryToDelete) return;
   
       fetch(`${apiUrl}/delete-category/${categoryToDelete}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        },
         method: 'DELETE',
       })
       .then((res) => {
