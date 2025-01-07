@@ -10,7 +10,7 @@ Su creadora tiene cuenta de Instagram, pero no una web oficial, por lo tanto, es
 
 Como siempre tendrá un stock bastante cambiante y con pocos productos, ya que va variando bastante sus creaciones, decidí exponer las categorías de una forma más visual en la página principal y no mediante selectores. De esta forma, las novedades y el propio diseño de sus fotografías se aprecian en el diseño principal de un primer vistazo.
 
-![Logo](/assets/pics/allCategories.png)
+![allCategories](./public/assets/pics/allCategories.png)
 
 A futuro, habría cosas que mejorar y añadir, (como por ejemplo añadir galerías y funcionalidades en la gestión tanto del usuario como del administrador), pero esto es un primer boceto con el objetivo de que sea escalable a futuro.
 
