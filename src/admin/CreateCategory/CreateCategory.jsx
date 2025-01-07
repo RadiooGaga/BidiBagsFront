@@ -76,20 +76,3 @@ export const CreateCategory = () => {
   );
 };
 
-
-
-/*
-
-// Al borrar una categoría o hacer cambios
-const handleDeleteCategory = async (categoryId) => {
-  const response = await fetch(`${apiUrl}/categories/${categoryId}`, {
-    method: 'DELETE',
-  });
-  if (response.ok) {
-    // Elimina el caché de categorías
-    localStorage.removeItem('categories'); 
-    // Realiza una nueva solicitud para obtener las categorías actualizadas
-    refetch(); // Si usas un hook como useApi que permita refetch
-  }
-};
-*/
