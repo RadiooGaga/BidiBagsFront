@@ -6,11 +6,11 @@ import { Button } from '../Button/Button';
 export const FormComponent = React.memo(({ className, fields, text, onSubmit, initialData = {}  }) => {
 
   const [formData, setFormData] = useState(
-    //validar si fields es un array y contiene elementos. Si no, establece objeto vacío.
+    //validar si fields es un array y que contiene elementos. Si no, establece objeto vacío.
     (Array.isArray(fields) && fields.length > 0)
       ? fields.reduce((acc, field) => ({
           ...acc,
-          //Comprueba si initialData existe y si el valor correspondiente a field.name no es undefined.
+          //Comprueba si hay datos de inicio y si el valor correspondiente a field.name no es undefined.
           [field.name]: initialData && initialData[field.name] !== undefined
             ? initialData[field.name]  // Si hay datos iniciales, se usa
             : (field.type === 'checkbox' ? false : ''), // Si no, usa el valor por defecto.
@@ -54,6 +54,7 @@ export const FormComponent = React.memo(({ className, fields, text, onSubmit, in
       required,
       placeholder,
       autocomplete,
+      options,
       wrapperClass, // Clase que envuelve el contenido del campo
     } = field;
 
@@ -94,7 +95,25 @@ export const FormComponent = React.memo(({ className, fields, text, onSubmit, in
           </>
         );
         break;
-      default:
+        case 'select': 
+        fieldContent = (
+          <>
+            <label htmlFor={name}>{label}</label>
+            <select value={formData[name] || ''} {...commonProps}>
+              <option value="" disabled>
+                Selecciona una opción
+              </option>
+              {options &&
+                options.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+            </select>
+            </>
+      );
+      break;
+    default:
         fieldContent = (
           <>
             <label htmlFor={name}>{label}</label>

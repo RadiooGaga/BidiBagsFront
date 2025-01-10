@@ -6,31 +6,31 @@ import { FormComponent } from '../../components/FormComponent/FormComponent';
 import { Message } from '../../components/Message/Message';
 
 
-export const UpdateCategory = () => {
+export const UpdateCollection = () => {
 
   const { id } = useParams()
   const { apiUrl } = useApiProvider();
   const { token } = useAuth();
-  const [ updateCategoryData, setUpdateCategoryData] = useState(null);
+  const [ updateCollectionData, setUpdateCollectionData] = useState(null);
   const [ successMessage, setSuccessMessage ] = useState('');
   const [ errorMessage, setErrorMessage ] = useState('');
   const navigate = useNavigate();
 
 
   useEffect(() => {
-    //cargar la categoria por id cuando el componente se monta
-    fetch(`${apiUrl}/category/${id}`)
+    //cargar la colección por id cuando el componente se monta
+    fetch(`${apiUrl}/collection/${id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data); 
-        setUpdateCategoryData(data);
+        setUpdateCollectionData(data);
       })
-      .catch((err) => console.error('Error al cargar la categoría:', err));
+      .catch((err) => console.error('Error al cargar la colección:', err));
   }, [apiUrl, id]);
 
 
   const fields = [
-    { name: 'categoryName', label: 'Categoría', type: 'text', placeholder: 'ej: bolsos', required: true },
+    { name: 'collectionName', label: 'Colección', type: 'text', placeholder: 'ej: bolsos', required: true },
     { name: 'img', label: 'Imagen', type: 'file' },
     { name: 'visible', label: 'Visible', type: 'checkbox', className: 'customCheckbox' }
   ];
@@ -52,7 +52,7 @@ export const UpdateCategory = () => {
       }
     });
 
-      fetch(`${apiUrl}/update-category/${id}`, {
+      fetch(`${apiUrl}/update-collection/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         },
@@ -61,23 +61,23 @@ export const UpdateCategory = () => {
       })
       .then((res) => {
         if (!res.ok) {
-          if (res.status === 404) setErrorMessage('404: Error al actualizar la categoría');
+          if (res.status === 404) setErrorMessage('404: Error al actualizar la colección');
         }
         return res.json();
       })
       .then((data) => {
         if (data.success) {
-          setSuccessMessage('Categoría actualizada!');
+          setSuccessMessage('Colección actualizada!');
           setTimeout(() => {
-            navigate('/admin-account/categories');
+            navigate('/admin-account/collections');
           }, 1500); 
         } else {
-          setErrorMessage(data.message || 'Hubo un error al actualizar la categoría');
+          setErrorMessage(data.message || 'Hubo un error al actualizar la colección');
           setTimeout(() => setErrorMessage(''), 2000);
         }
       })
       .catch((error) => {
-        console.error('Error al actualizar la categoría:', error);
+        console.error('Error al actualizar la colección:', error);
         setErrorMessage(error.message || 'Error desconocido. Intenta de nuevo.');
         setTimeout(() => setErrorMessage(''), 2000);
       });
@@ -86,12 +86,12 @@ export const UpdateCategory = () => {
 
   return (
     <>
-    {updateCategoryData ? (
+    {updateCollectionData ? (
       <FormComponent 
       fields={fields} 
-      text="ACTUALIZAR CATEGORIA" 
+      text="ACTUALIZAR COLECCIÓN" 
       onSubmit={handleUpdate}
-      initialData={updateCategoryData}
+      initialData={updateCollectionData}
       />
     ) : ( <p>cargando datos...</p>
     )}

@@ -9,7 +9,9 @@ export const NavBarAdminAccount = () => {
   const navItems = [
     { to: "products", label: "TODOS MIS PRODUCTOS",  alt: "allMyProducts" },
     { to: "categories", label: "TODAS MIS CATEGORÍAS", alt: "allMyCategories" },
+    { to: "collections", label: "TODAS MIS COLECCIONES", alt: "allMyCollections" },
     { to: "create-category", label: "CREAR CATEGORIA", alt: "createCategory" },
+    { to: "create-collection", label: "CREAR COLECCIÓN", alt: "createCollection" },
     { to: "create-product", label: "CREAR PRODUCTO", alt: "createProduct" },
     { to: "stock", label: "INVENTARIO", alt: "stock" },
     { to: 'create-post', label: 'ENTRADA EN BLOG', alt: 'createPost'},

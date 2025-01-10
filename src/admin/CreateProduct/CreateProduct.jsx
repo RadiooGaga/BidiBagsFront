@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../utils/AuthContext';
 import { useApiProvider } from '../../utils/ApiContext';
@@ -11,19 +11,47 @@ export const CreateProduct = () => {
 
   const { apiUrl } = useApiProvider();
   const { token } = useAuth();
+
+  const [ categories, setCategories ] = useState([]);
+  const [ collections, setCollections ] = useState([]); 
   const [ successMessage, setSuccessMessage ] = useState('');
   const [ errorMessage, setErrorMessage ] = useState('');
   const navigate = useNavigate();
 
+    // Cargar categorías y colecciones 
+    useEffect(() => {
+      fetch(`${apiUrl}/categories`)
+        .then((res) => res.json())
+        .then((data) => setCategories(data))
+        .catch((err) => console.error('Error al cargar categorías:', err));
+  
+      fetch(`${apiUrl}/collections`)
+        .then((res) => res.json())
+        .then((data) => setCollections(data))
+        .catch((err) => console.error('Error al cargar colecciones:', err));
+    }, [apiUrl]);
+
+
+  //campos del form
   const fields = [
-    { name: 'categoryName', label: 'Categoría', placeholder: 'categoría a la que pertenece', type: 'text', required: true },
-    { name: 'collectionName', label: 'Colección', placeholder: 'nombre de la colección', type: 'text', required: true },
+    { name: 'categoryName', label: 'Categoría',  type: 'select', required: true, 
+      options: categories.map((category) => ({
+        value: category.categoryName,
+        label: category.categoryName,
+      })) },
+    { name: 'collectionName', label: 'Colección', type: 'select', required: false,
+      options: collections.map((collection) => ({
+        value: collection.collectionName,
+        label: collection.collectionName,
+      }))
+     },
     { name: 'img', label: 'Imagen', type: 'file', required: true },
     { name: 'price', label: 'Precio', placeholder: 'ejemplo: 30', type: 'number', required: true },
     { name: 'inStock', label: 'En Stock', type: 'checkbox', className: 'customCheckbox' },
     { name: 'description', label: 'Descripción breve del producto', type: 'text', required: true },
     { name: 'details', label: 'Detalles del producto', type: 'textarea', required: true },
   ];
+
 
   const handleRegister = (formData) => {
     if (!formData.img) {

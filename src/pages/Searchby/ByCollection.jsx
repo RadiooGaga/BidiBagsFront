@@ -5,28 +5,25 @@ import { Card } from '../../components/ProductCards/Card';
 import { Error } from '../../components/Error/Error';
 import { Loading } from '../../components/Loading/Loading';
 import StyledProductPages from '../../StyledComponents/StyledProductPages';
-import { useAuth } from '../../utils/AuthContext';
 const { ProductsContainer } = StyledProductPages; 
 
 
 
-export const ByCategory = () => {
+export const ByCollection = () => {
 
-  const { user } = useAuth()
-  const { categoryName } = useParams();
+  const { collectionName } = useParams();
   const navigate = useNavigate();
 
   const { products, loading, error } = useApi({
-    endpoint:`/products/category/${categoryName}`,  
+    endpoint:`/products/collection/${collectionName}`,  
     url:''
-  });
+  }); 
   
-
   if (loading) return (
     <Loading
     loading={loading}
     text="Buscando productos..."
-    message={`Cargando productos para la categoría: ${categoryName}`}
+    message={`Cargando productos para la colección: ${collectionName}`}
   />
   )
 
@@ -37,7 +34,7 @@ export const ByCategory = () => {
   
   if (!products || products.length === 0) {
     return (
-      <p>{`No existen productos para la categoría ${categoryName}`}</p>
+      <p>{`No existen productos para la colección ${collectionName}`}</p>
     )
   }
 
@@ -47,17 +44,6 @@ export const ByCategory = () => {
   };
 
 
-    // Según el rol del usuario
-    const handleCollectionClick = () => {
-      if (user && user.rol === 'admin') {
-        navigate('/admin-account/collections');
-      } else {
-        navigate('/collections');
-      }
-    };
-
-
-
   return (
     <ProductsContainer>
       {products && products.length > 0 ? (
@@ -65,8 +51,7 @@ export const ByCategory = () => {
           <Card
             key={product._id}
             product={product}
-            onClick={() => handleSelectionClick(product._id)}
-            onCollectionClick={handleCollectionClick} 
+            onCollectionClick={() => handleSelectionClick(product._id)}
           />
         ))
       ) : (

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 
-const CategoryContainer  = styled.div `
+const Container  = styled.div `
     display: grid;   
     grid-template-columns: repeat(3, 1fr); 
     grid-template-rows: auto;  
@@ -54,4 +54,13 @@ const CategoryContainer  = styled.div `
     }
 `
 
-export default { CategoryContainer }
+const Title  = styled.h4 `
+        display: flex;
+        justify-content:center;
+        align-self: center;
+        font-family: var(--font-walkway); 
+        font-size: var(--font-size-m);
+        color: var(--color-text);
+`
+
+export default { Container, Title }

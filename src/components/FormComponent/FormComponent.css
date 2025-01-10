@@ -22,6 +22,14 @@ label {
     color: var(--color-text); 
 }
 
+select {
+    align-self: start;
+    font-family: var( --font-walkway);
+    font-size: var(--font-size-s);
+    color: var(--color-text); 
+    margin-bottom: var(--margin-s);
+}
+
 #content, #details {
     position: relative;
     top: 5px;

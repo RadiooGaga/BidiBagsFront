@@ -42,7 +42,11 @@ export const useApi = ({ endpoint, url }) => {
                     post: getTypeofData === 'latest-post' ? data : {},
                     categories: getTypeofData === 'categories' ? data : [],
                     category: getTypeofData === 'category' ? data[0] : {},
+                    collections: getTypeofData === 'collections' ? data : [],
+                    collection: getTypeofData === 'collection' ? data[0] : {},
+                    
                 };
+                
 
                 // Guardamos los datos en caché en localStorage
                 localStorage.setItem(cacheKey, JSON.stringify(formattedData)); 

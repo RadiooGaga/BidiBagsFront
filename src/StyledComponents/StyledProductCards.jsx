@@ -186,7 +186,6 @@ const DecisionButtons = styled.div `
     display:flex;
     flex-wrap: wrap;
     gap: var(--gap-m);
-
 `
 
 const Details = styled.div  `

@@ -1,10 +1,10 @@
 import React, { useState, useEffect} from 'react';
 import { useApi } from '../../utils/useApi';
 import { Error } from '../../components/Error/Error';
-import { CategoryBox } from '../../components/ProductCards/CategoryBox';
+import { Box } from '../../components/ProductCards/Box';
 import StyledMainCategories from '../../StyledComponents/StyledMainCategories';
 import { useNavigate } from 'react-router-dom';
-const { CategoryContainer } = StyledMainCategories;
+const { Container } = StyledMainCategories;
 
 
 export const AllCategories = () => {
@@ -34,16 +34,16 @@ export const AllCategories = () => {
       }
 
 
-      return (
-        <CategoryContainer>
-          {visibleCategories.map(({ categoryName, img }, index) => (
-            <CategoryBox 
-              key={index} 
-              categoryName={categoryName}
-              img={img} 
-              onClick={() => navigate(`/products/category/${categoryName}`)}  
-            />
-          ))}
-        </CategoryContainer>
-      );
-    };
+  return (
+    <Container>
+      {visibleCategories.map(({ categoryName, img }, index) => (
+        <Box 
+          key={index} 
+          categoryName={categoryName}
+          img={img} 
+          onClick={() => navigate(`/products/category/${categoryName}`)}  
+        />
+      ))}
+    </Container>
+  );
+};

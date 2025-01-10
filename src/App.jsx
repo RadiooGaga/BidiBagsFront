@@ -6,6 +6,7 @@ import './App.css'
 
 import { Header } from './components/Header/Header';
 import { AllCategories } from './pages/Searchby/AllCategories';
+import { AllCollections } from './pages/Searchby/AllCollections';
 import { TheDesign } from './pages/TheDesign/TheDesign';
 import { Blog } from './pages/Blog/Blog';
 
@@ -13,6 +14,7 @@ import { LoginRegister } from './pages/LoginRegister/LoginRegister';
 import { Login } from './pages/Login/Login';
 
 import { ByCategory } from './pages/Searchby/ByCategory'
+import { ByCollection } from './pages/Searchby/ByCollection';
 import { ById } from './pages/Searchby/ById';
 
 import { Account } from './pages/Account/Account';
@@ -20,10 +22,13 @@ import { AdminAccount } from './admin/AdminAccount/AdminAccount';
 import { ProtectedRoute } from './utils/ProtectedRoute';
 import { AllMyProducts } from './admin/AllMyProducts/AllMyProducts';
 import { AllMyCategories } from './admin/AllMyCategories/AllMyCategories';
+import { AllMyCollections } from './admin/AllMyCollections/AllMyCollections';
 import { CreateCategory } from './admin/CreateCategory/CreateCategory';
+import { CreateCollection } from './admin/CreateCollection/CreateCollection';
 import { CreateProduct } from './admin/CreateProduct/CreateProduct';
 import { UpdateProduct } from './admin/Update/UpdateProduct';
 import { UpdateCategory } from './admin/Update/UpdateCategory';
+import { UpdateCollection } from './admin/Update/UpdateCollection';
 import { Stock } from './admin/Stock/Stock';
 import { BlogEditor } from './admin/BlogEditor/BlogEditor';
 
@@ -42,6 +47,8 @@ import { Contact } from './pages/FooterPages/Contact';
 import { Legal } from './pages/FooterPages/Legal';
 import { Terms } from './pages/FooterPages/Terms';
 import { Footer } from './components/Footer/Footer';
+
+
 
 
 
@@ -72,12 +79,14 @@ export const App = () => {
       <Header />
         <Routes>
           <Route path="/" index element={<AllCategories />} />
+          <Route path='/collections' element={<AllCollections />} />
           <Route path="/concept" element={<TheDesign />} />
           <Route path="/latest-post" element={<Blog />} />
           <Route path="/register" element={<LoginRegister />} />
           <Route path="/login" element={<Login />} />
 
           <Route path='/products/category/:categoryName' element={<ByCategory />} />
+          <Route path='/products/collection/:collectionName' element={<ByCollection />} />
           <Route path='/products/:id' element={<ById />} />
 
           <Route path="/account" element={
@@ -100,10 +109,13 @@ export const App = () => {
             }> {/* Rutas hijas dentro de /admin-account */}
               <Route path="products" element={<AllMyProducts />} />
               <Route path="categories" element={<AllMyCategories />} />
+              <Route path="collections" element={<AllMyCollections />} />
               <Route path="create-category" element={<CreateCategory />} />
+              <Route path="create-collection" element={<CreateCollection />} />
               <Route path="create-product" element={<CreateProduct />} />
               <Route path="update-product/:id" element={<UpdateProduct />} />
               <Route path="update-category/:id" element={<UpdateCategory />} />
+              <Route path="update-collection/:id" element={<UpdateCollection />} />
               <Route path="stock" element={<Stock />} />
               <Route path="create-post" element={<BlogEditor />} />
               <Route path="signout" element={<SignOut />} />

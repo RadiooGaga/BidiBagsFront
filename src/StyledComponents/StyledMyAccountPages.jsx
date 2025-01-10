@@ -97,6 +97,7 @@ const AccountNavUl = styled.ul `
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+
 `
 
 const StyledLabel = styled.span `
@@ -104,6 +105,9 @@ const StyledLabel = styled.span `
     font-family: var(--font-walkway);
     font-size: var(--font-size-m);
     cursor: pointer;
+    &:hover {
+        color: var( --color-barbiePink)
+    }
 `
 
 const FormSection = styled.section `
@@ -123,6 +127,7 @@ const Titles = styled.span `
     align-self: center;
     font-family: var(--font-walkway); 
     font-size: var(--font-size-m);
+
 `
 
 export default { SectionMyAccount, DowloadCsvDiv, AccountDiv, AccountNavDiv, AccountNavUl, StyledLabel, FormSection, Titles }

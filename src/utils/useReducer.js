@@ -9,6 +9,8 @@ export const INITIAL_STATE = {
     post:{},
     categories:[],
     category:{},
+    collections:[],
+    collection:{},
     loading: false,
     error: null,
   };
@@ -27,7 +29,9 @@ export const INITIAL_STATE = {
           posts: [],
           post:{},
           categories:[], 
-          category:{} 
+          category:{},
+          collections: [],
+          collection: {}
         };
       case 'FETCH_SUCCESS':
         return {
@@ -41,6 +45,8 @@ export const INITIAL_STATE = {
           post: action.payload.post,
           categories: action.payload.categories, 
           category: action.payload.category,
+          collections: action.payload.collections, 
+          collection: action.payload.collection,
          
         };
       case 'FETCH_FAILURE':
