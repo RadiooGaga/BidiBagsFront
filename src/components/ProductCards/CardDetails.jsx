@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../Button/Button'
 import { Warning } from '../../components/Warning/Warning';
 import { Message } from '../Message/Message';
+import { GoBack } from '../GoBack/GoBack';
 import StyledProductPages from '../../StyledComponents/StyledProductPages';
 const { ProductsContainer, ProductCardDetailed } = StyledProductPages; 
 import StyledCards from '../../StyledComponents/StyledProductCards';
@@ -81,6 +82,7 @@ export const CardDetails = React.memo(({ product, isFavorite, heartClicked, onSu
 
   return (
     <ProductsContainer>
+      <GoBack />
         {showWarning && (
         <Warning 
           text="¿Eliminar este producto?"

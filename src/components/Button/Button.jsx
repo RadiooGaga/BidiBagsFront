@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from "framer-motion"
 
-export const Button = ({ type, text, width, margin, backgroundColor, colorText, padding, hoverBackgroundColor, 
+export const Button = ({ type, text, img, width, margin, backgroundColor, colorText, padding, hoverBackgroundColor, 
   tapBackgroundColor,  onClick, children }) => {
     
     return (
@@ -29,7 +29,9 @@ export const Button = ({ type, text, width, margin, backgroundColor, colorText, 
         }}
         onClick={onClick}
       >
-        {text}{children}
+        {text}
+        {img}
+        {children}
       </motion.button>
     );
 };

@@ -39,8 +39,10 @@ export const AllMyCategories = () => {
 
 
   // determina si la categoría está visible para el usuario
-  const getVisibilityText = (visible) => {
-    return visible ? "visible" : "oculto";
+  const getVisibility = (visible) => {
+    return {
+      img: visible ? "/assets/icons/eyeOpened.png" : "/assets/icons/eyeClosed.png",
+    };
   };
   
 
@@ -153,24 +155,36 @@ export const AllMyCategories = () => {
         <p>No hay categorías disponibles</p>
       ) : (
           categories.map((category) => (
-              <Card
-              key={category._id}
-              category={category}
-              visibleText={getVisibilityText(category.visible)}
-              visibleStyle={{ opacity: category.visible ? "100%" : "30%" }} 
-              >
+            <Card
+            key={category._id}
+            category={category}
+            visibleStyle={{ opacity: category.visible ? "1" : "0.3" }} 
+            visibleEye={getVisibility(true)}
+            closedEye={getVisibility(false)}
+            
+            >
               <Button 
-              text="editar" 
               colorText={"var(--color-barbiePink)"} 
               backgroundColor={"transparent"}
               onClick={() => handleUpdate(category._id)} 
-              />
-              <Button 
-              text="eliminar" 
-              colorText={"var(--color-aubergine)"} 
-              backgroundColor={"transparent"}
-              onClick={() => handleOpenWarning(category._id)} 
-              />
+              >
+                <img 
+                  src="/assets/icons/lapiz.png" 
+                  alt="lapiz" 
+                  style={{ width: '20px', height: '20px' }} 
+                />
+              </Button>
+                <Button 
+                  colorText={"var(--color-aubergine)"} 
+                  backgroundColor={"transparent"}
+                  onClick={() => handleOpenWarning(category._id)}
+                >
+                  <img 
+                    src="/assets/icons/papelera.png" 
+                    alt="papelera" 
+                    style={{ width: '20px', height: '20px' }} 
+                  />
+                </Button>
               </Card>     
           ))
         )}

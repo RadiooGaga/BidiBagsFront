@@ -22,7 +22,6 @@ export const AllMyProducts = () => {
       navigate(`/products/${id}`)
     };
 
-
     const handleDownloadCsv = async () => {
       try {
         const token = localStorage.getItem('token'); // sacar el token almacenado

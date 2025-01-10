@@ -73,12 +73,11 @@ const ProductCardPic = styled.img `
 const ProductDetails = styled.div `
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items:center;
+    justify-content: space-around;
+    align-items: center;
 
     @media screen and (max-width: 769px){
         display: flex;
-        flex-direction: column;
         gap: var(--gap-m)
     }
 `
@@ -157,6 +156,7 @@ const ProductCardH3 = styled.h3 `
 const ProductCardH4 = styled.h4 `
     font-size: var(--font-size-s);
 `
+
 
 const SpanContent = styled.span `
     font-size: var(--font-size-m);

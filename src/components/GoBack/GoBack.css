@@ -1,0 +1,35 @@
+.goBackButton {
+    position: relative;
+    right: 1em;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: var(--margin-s);
+}
+
+.goBackButton img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media screen and (min-width: 230px) and (max-width: 768px){
+    .goBackButton {
+        position: relative;
+        width: 30px;
+        height: 30px;
+        right: 43%;
+    }
+}
+
+
+@media screen and (min-width: 769px) and (max-width: 1443px){
+    .goBackButton {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        right: 45%;
+    }
+}
